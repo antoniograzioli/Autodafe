@@ -1,6 +1,5 @@
 # Autodafe Module Pack for VCV Rack
 ![AutodafeModules](http://www.autodafe.net/media/com_eshop/products/resized/autodafe-module-pack-vcv-rack-700x700.png)
-
 Autodafe Module Pack for VCV rack contains **11 modules**:
 
 - **LFO module** with CV Input
@@ -12,7 +11,5 @@ Autodafe Module Pack for VCV rack contains **11 modules**:
 - **Foldback distortion**
 - **Bitcrusher**
 - **Phaser**
-
-
 
 My VCV Rack Modules Pack works on **Mac/PC/Linux** using **Rack 0.3.2** (current release at the moment I am writing), not with 0.3.1.
