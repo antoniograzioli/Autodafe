@@ -1,5 +1,5 @@
 # Autodafe Module Pack for VCV Rack
-![]({{site.baseurl}}http://www.autodafe.net/media/com_eshop/products/resized/autodafe-module-pack-vcv-rack-700x700.png)
+![AutodafeModules](http://www.autodafe.net/media/com_eshop/products/resized/autodafe-module-pack-vcv-rack-700x700.png)
 
 Autodafe Module Pack for VCV rack contains **11 modules**:
 
