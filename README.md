@@ -1,5 +1,6 @@
 # Autodafe Module Pack for VCV Rack
 ![AutodafeModules](http://www.autodafe.net/media/com_eshop/products/resized/autodafe-module-pack-vcv-rack-700x700.png)
+
 Autodafe Module Pack for VCV rack contains **11 modules**:
 
 - **LFO module** with CV Input
