@@ -1,5 +1,5 @@
 //**************************************************************************************
-//Clock Divider Module for VCV Rack by Autodafe http://www.autodafe.net
+//Fixed Filter Bank Module for VCV Rack by Autodafe http://www.autodafe.net
 //
 //  Based on code created by Created by Nigel Redmon 
 //  EarLevel Engineering: earlevel.com
@@ -38,6 +38,17 @@ struct FixedFilter : Module{
 
 
 	FixedFilter();
+
+Biquad *bq1 = new Biquad();
+Biquad *bq2 = new Biquad();
+Biquad *bq3 = new Biquad();
+Biquad *bq4 = new Biquad();
+Biquad *bq5 = new Biquad();
+Biquad *bq6 = new Biquad();
+Biquad *bq7 = new Biquad();
+Biquad *bq8 = new Biquad();
+
+	
 	void step();
 };
 
@@ -57,14 +68,6 @@ FixedFilter::FixedFilter() {
 
 float out;
 
-Biquad *bq1 = new Biquad();
-Biquad *bq2 = new Biquad();
-Biquad *bq3 = new Biquad();
-Biquad *bq4 = new Biquad();
-Biquad *bq5 = new Biquad();
-Biquad *bq6 = new Biquad();
-Biquad *bq7 = new Biquad();
-Biquad *bq8 = new Biquad();
 
 
 
@@ -76,18 +79,18 @@ void FixedFilter::step() {
 	
 	
 
-	float input = getf(inputs[INPUT]) / 5.0;
+	float input = inputs[INPUT].value / 5.0;
 	
 
 
-	bq1->setBiquad(bq_type_peak, 75.0 / gSampleRate, 5, params[EQ1]);
-	bq2->setBiquad(bq_type_peak, 125.0 / gSampleRate, 5, params[EQ2]);
-	bq3->setBiquad(bq_type_peak, 250.0 / gSampleRate, 5, params[EQ3]);
-	bq4->setBiquad(bq_type_peak, 500.0 / gSampleRate, 5, params[EQ4]);
-	bq5->setBiquad(bq_type_peak, 1000.0 / gSampleRate, 5, params[EQ5]);
-	bq6->setBiquad(bq_type_peak, 2000.0 / gSampleRate, 5, params[EQ6]);
-	bq7->setBiquad(bq_type_peak, 4000.0 / gSampleRate, 5, params[EQ7]);
-	bq8->setBiquad(bq_type_peak, 8000.0 / gSampleRate, 5, params[EQ8]);
+	bq1->setBiquad(bq_type_peak, 75.0 / gSampleRate, 5, params[EQ1].value);
+	bq2->setBiquad(bq_type_peak, 125.0 / gSampleRate, 5, params[EQ2].value);
+	bq3->setBiquad(bq_type_peak, 250.0 / gSampleRate, 5, params[EQ3].value);
+	bq4->setBiquad(bq_type_peak, 500.0 / gSampleRate, 5, params[EQ4].value);
+	bq5->setBiquad(bq_type_peak, 1000.0 / gSampleRate, 5, params[EQ5].value);
+	bq6->setBiquad(bq_type_peak, 2000.0 / gSampleRate, 5, params[EQ6].value);
+	bq7->setBiquad(bq_type_peak, 4000.0 / gSampleRate, 5, params[EQ7].value);
+	bq8->setBiquad(bq_type_peak, 8000.0 / gSampleRate, 5, params[EQ8].value);
 
 	
 	
@@ -103,7 +106,7 @@ void FixedFilter::step() {
 
 
 
-	setf(outputs[OUT], out*5);
+	outputs[OUT].value= out*5;
 	}
 
 FixedFilterWidget::FixedFilterWidget() {
@@ -114,7 +117,8 @@ FixedFilterWidget::FixedFilterWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/FixedFilterBank.svg"));
+
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/FixedFilterBank.svg")));
 		addChild(panel);
 	}
 	

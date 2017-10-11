@@ -58,13 +58,13 @@ float foldback(float in, float threshold)
 
 void FoldBack::step() {
 	
-	float in = getf(inputs[INPUT]) / 5.0;
-	float threshold = params[THRESHOLD_PARAM];
-	float coeff = getf(inputs[CV_THRESHOLD]) * params[ATTEN_PARAM] / 5.0;
+	float in = inputs[INPUT].value / 5.0;
+	float threshold = params[THRESHOLD_PARAM].value;
+	float coeff = inputs[CV_THRESHOLD].value * params[ATTEN_PARAM].value / 5.0;
 
 
 
-	setf(outputs[OUTPUT], 5.0* foldback(in, threshold+coeff));
+	outputs[OUTPUT].value= 5.0* foldback(in, threshold+coeff);
 
 
 
@@ -81,7 +81,8 @@ FoldBackWidget::FoldBackWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/FoldBack.svg"));
+		
+				panel->setBackground(SVG::load(assetPlugin(plugin, "res/FoldBack.svg")));
 		addChild(panel);
 	}
 

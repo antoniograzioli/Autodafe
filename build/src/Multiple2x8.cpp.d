@@ -7,9 +7,11 @@ build/src/Multiple2x8.cpp.o: src/Multiple2x8.cpp src/Autodafe.hpp \
   ../../include/../ext/oui-blendish/blendish.h \
   ../../include/../ext/nanosvg/src/nanosvg.h ../../dep/include/GL/glew.h \
   ../../dep/include/GLFW/glfw3.h ../../include/components.hpp \
-  ../../include/dsp.hpp ../../include/dsp/frame.hpp \
-  ../../include/dsp/fft.hpp ../../include/dsp/ode.hpp \
-  ../../include/dsp/ringbuffer.hpp ../../include/dsp/samplerate.hpp \
-  ../../dep/include/samplerate.h ../../include/dsp/fir.hpp \
-  ../../include/dsp/decimator.hpp ../../include/dsp/filter.hpp \
-  ../../include/dsp/minblep.hpp src/Biquad.h
+  ../../include/asset.hpp ../../include/dsp.hpp \
+  ../../include/dsp/frame.hpp ../../include/dsp/fft.hpp \
+  ../../include/dsp/ode.hpp ../../include/dsp/ringbuffer.hpp \
+  ../../include/dsp/samplerate.hpp ../../dep/include/samplerate.h \
+  ../../include/dsp/fir.hpp ../../include/dsp/decimator.hpp \
+  ../../include/dsp/filter.hpp ../../include/dsp/minblep.hpp \
+  ../../include/dsp/digital.hpp src/Biquad.h src/VAStateVariableFilter.h \
+  src/DSPUtilities.h

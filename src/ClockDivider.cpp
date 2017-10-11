@@ -89,7 +89,7 @@ void ClockDivider::step() {
 
 	bool reset = false;
 
-	if (reset_trig.process(params[RESET_PARAM]))
+	if (reset_trig.process(params[RESET_PARAM].value))
 	{
 		clock2Count = 0;
 		clock4Count = 0;
@@ -100,35 +100,35 @@ void ClockDivider::step() {
 		reset = true;
 	}
 
-	if ((clock2Count >= divider2) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock2Count >= divider2) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock2Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock4Count >= divider4) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock4Count >= divider4) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock4Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock8Count >= divider8) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock8Count >= divider8) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock8Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock16Count >= divider16) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock16Count >= divider16) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock16Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock32Count >= divider32) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock32Count >= divider32) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock32Count = 0;
 	
@@ -138,7 +138,7 @@ void ClockDivider::step() {
 
 	if (clock2Count < divider2 / 2)
 	{
-		setf(outputs[OUT2], 10.0);
+		outputs[OUT2].value= 10.0;
 		if (clock2Count == 0)
 		{
 			lights[0] = 1.0;
@@ -151,7 +151,7 @@ void ClockDivider::step() {
 	}
 	else
 	{
-		setf(outputs[OUT2], 0.0);
+		outputs[OUT2].value= 0.0;
 		lights[0] = 0.0;
 		
 	}
@@ -159,7 +159,7 @@ void ClockDivider::step() {
 
 	if (clock4Count < divider4 / 2)
 	{
-		setf(outputs[OUT4], 10.0);
+		outputs[OUT4].value= 10.0;
 		if (clock4Count == 0)
 		{
 			lights[1] = 1.0;
@@ -172,7 +172,7 @@ void ClockDivider::step() {
 	}
 	else
 	{
-		setf(outputs[OUT4], 0.0);
+		outputs[OUT4].value= 0.0;
 		lights[1] = 0.0;
 		
 	}
@@ -180,7 +180,7 @@ void ClockDivider::step() {
 
 	if (clock8Count < divider8 / 2)
 	{
-		setf(outputs[OUT8], 10.0);
+		outputs[OUT8].value= 10.0;
 		if (clock8Count == 0)
 		{
 			lights[2] = 1.0;
@@ -193,7 +193,7 @@ void ClockDivider::step() {
 	}
 	else
 	{
-		setf(outputs[OUT8], 0.0);
+		outputs[OUT8].value= 0.0;
 		lights[2] = 0.0;
 		
 	}
@@ -201,7 +201,7 @@ void ClockDivider::step() {
 
 	if (clock16Count < divider16 / 2)
 	{
-		setf(outputs[OUT16], 10.0);
+		outputs[OUT16].value= 10.0;
 		if (clock16Count == 0)
 		{
 			lights[3] = 1.0;
@@ -214,7 +214,7 @@ void ClockDivider::step() {
 	}
 	else
 	{
-		setf(outputs[OUT16], 0.0);
+		outputs[OUT16].value= 0.0;
 		lights[3] = 0.0;
 	
 	}
@@ -222,7 +222,7 @@ void ClockDivider::step() {
 
 	if (clock32Count < divider32 / 2)
 	{
-		setf(outputs[OUT32], 10.0);
+		outputs[OUT32].value= 10.0;
 		if (clock16Count == 0)
 		{
 			lights[4] = 1.0;
@@ -235,7 +235,7 @@ void ClockDivider::step() {
 	}
 	else
 	{
-		setf(outputs[OUT32], 0.0);
+		outputs[OUT32].value= 0.0;
 		lights[4] = 0.0;
 	
 	}
@@ -246,7 +246,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger2.process(getf(inputs[CLOCK_INPUT])) && clock2Count <= divider2)
+		if (trigger2.process(inputs[CLOCK_INPUT].value) && clock2Count <= divider2)
 		{
 			clock2Count++;
 		
@@ -256,7 +256,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger4.process(getf(inputs[CLOCK_INPUT])) && clock4Count <= divider4)
+		if (trigger4.process(inputs[CLOCK_INPUT].value) && clock4Count <= divider4)
 		{
 			clock4Count++;
 			
@@ -266,7 +266,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger8.process(getf(inputs[CLOCK_INPUT])) && clock8Count <= divider8)
+		if (trigger8.process(inputs[CLOCK_INPUT].value) && clock8Count <= divider8)
 		{
 			clock8Count++;
 		
@@ -276,7 +276,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger16.process(getf(inputs[CLOCK_INPUT])) && clock16Count <= divider16)
+		if (trigger16.process(inputs[CLOCK_INPUT].value) && clock16Count <= divider16)
 		{
 			clock16Count++;
 		
@@ -286,7 +286,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger32.process(getf(inputs[CLOCK_INPUT])) && clock32Count <= divider32)
+		if (trigger32.process(inputs[CLOCK_INPUT].value) && clock32Count <= divider32)
 		{
 			clock32Count++;
 			
@@ -304,7 +304,8 @@ ClockDividerWidget::ClockDividerWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/ClockDivider.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/ClockDivider.svg")));
+		
 		addChild(panel);
 	}
 

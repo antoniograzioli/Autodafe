@@ -1,8 +1,7 @@
 //**************************************************************************************
-//BitCrusher Module for VCV Rack by Autodafe http://www.autodafe.net
+//Phaser Module for VCV Rack by Autodafe http://www.autodafe.net
 //
-//Based on code taken from the Fundamentals plugins by Andrew Belt http://www.vcvrack.com
-//And part of code on musicdsp.org: http://musicdsp.org/showArchiveComment.php?ArchiveID=78
+//Based on open source code on musicdsp.org
 //**************************************************************************************
 
 
@@ -142,11 +141,11 @@ void PhaserFx::step() {
 
 
 	
-	float rate = params[PARAM_RATE];
-	float feedback = params[PARAM_FEEDBACK];
-	float depth = params[PARAM_DEPTH];
+	float rate = params[PARAM_RATE].value;
+	float feedback = params[PARAM_FEEDBACK].value;
+	float depth = params[PARAM_DEPTH].value;
 
-	float input = getf(inputs[INPUT]) / 5.0;
+	float input = inputs[INPUT].value / 5.0;
 
 		pha->Rate(rate);
 		pha->Feedback(feedback);
@@ -156,7 +155,7 @@ void PhaserFx::step() {
 
 
 
-	setf(outputs[OUT], out * 5);
+	outputs[OUT].value= out * 5;
 	
 
 
@@ -165,6 +164,10 @@ void PhaserFx::step() {
 
 }
 
+
+
+ 
+    
 PhaserFxWidget::PhaserFxWidget() {
 	PhaserFx *module = new PhaserFx();
 	setModule(module);
@@ -173,23 +176,26 @@ PhaserFxWidget::PhaserFxWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/Phaser.svg"));
-		addChild(panel);
+		
+        panel->setBackground(SVG::load(assetPlugin(plugin, "res/Phaser.svg")));
+		addChild(panel); 
 	}
 
 	addChild(createScrew<ScrewSilver>(Vec(1, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(1, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
-
-		
+      
 	addParam(createParam<Davies1900hBlackKnob>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
+    //addParam(createParam<AutodafeKnob>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
 
 	addParam(createParam<Davies1900hBlackKnob>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
+    //addParam(createParam<AutodafeKnob>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
 
 	addParam(createParam<Davies1900hBlackKnob>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
+    //addParam(createParam<AutodafeKnob>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
 
 	addInput(createInput<PJ301MPort>(Vec(10, 320), module, PhaserFx::INPUT));
 	addOutput(createOutput<PJ301MPort>(Vec(48, 320), module, PhaserFx::OUT));
-	
+ 
 }
