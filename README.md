@@ -1,6 +1,6 @@
 # Autodafe Module Pack for VCV Rack
 
-Autodafe Module Pack for VCV rack contains 12 modules:
+Autodafe Module Pack for VCV rack contains 13 modules:
 
 LFO module with CV Input
 
@@ -13,6 +13,8 @@ Clock Divider
 8x16 Trigger Sequencer
 
 Fixed Filter Bank
+
+Formant Filter
 
 Multimode Filter
 
