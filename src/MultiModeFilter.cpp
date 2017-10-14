@@ -1,7 +1,10 @@
 //**************************************************************************************
-//Multimode Filter Module for VCV Rack by Autodafe http://www.autodafe.net
+//Clock Divider Module for VCV Rack by Autodafe http://www.autodafe.net
 //
-// Based on code by  Jordan Harris
+//  Based on code created by Created by Nigel Redmon 
+//  EarLevel Engineering: earlevel.com
+//  Copyright 2012 Nigel Redmon
+//  http://www.earlevel.com/main/2012/11/26/biquad-c-source-code/
 //**************************************************************************************
 
 #include "Autodafe.hpp"
@@ -162,7 +165,7 @@ MultiModeFilterWidget::MultiModeFilterWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/MultiModeFilter.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin,"res/MultiModeFilter.svg")));
 		addChild(panel);
 	}
 

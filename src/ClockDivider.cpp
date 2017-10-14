@@ -6,6 +6,7 @@
 
 
 #include "Autodafe.hpp"
+#include "dsp/digital.hpp"
 struct ClockDivider : Module {
 	enum ParamIds {
 		RESET_PARAM,

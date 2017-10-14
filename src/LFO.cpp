@@ -7,7 +7,8 @@
 
 
 #include "Autodafe.hpp"
-
+#include "dsp/decimator.hpp"
+#include "dsp/filter.hpp"
 
 #define OVERSAMPLE 16
 #define QUALITY 16

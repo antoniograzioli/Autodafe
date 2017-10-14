@@ -1,6 +1,6 @@
 #include "Autodafe.hpp"
 #include <math.h>
-#include "dsp.hpp"
+
 
 
 
@@ -24,9 +24,14 @@ void init(rack::Plugin *p) {
 		createModel<FoldBackWidget>(plugin, "Foldback Distortion", "Foldback Distortion");
 		createModel<BitCrusherWidget>(plugin, "BitCrusher", "BitCrusher");
 		createModel<PhaserFxWidget>(plugin, "Phaser", "Phaser");
-	
+		
+		
+		
+		
 		
 
+		
+		//printf("%p %p\n", plugin, &plugin);
 		
 		
 

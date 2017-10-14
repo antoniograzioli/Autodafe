@@ -1,5 +1,5 @@
 //**************************************************************************************
-//Fixed Filter Bank Module for VCV Rack by Autodafe http://www.autodafe.net
+//Clock Divider Module for VCV Rack by Autodafe http://www.autodafe.net
 //
 //  Based on code created by Created by Nigel Redmon 
 //  EarLevel Engineering: earlevel.com

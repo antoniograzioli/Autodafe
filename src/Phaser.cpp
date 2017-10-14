@@ -1,7 +1,8 @@
 //**************************************************************************************
-//Phaser Module for VCV Rack by Autodafe http://www.autodafe.net
+//BitCrusher Module for VCV Rack by Autodafe http://www.autodafe.net
 //
-//Based on open source code on musicdsp.org
+//Based on code taken from the Fundamentals plugins by Andrew Belt http://www.vcvrack.com
+//And part of code on musicdsp.org: http://musicdsp.org/showArchiveComment.php?ArchiveID=78
 //**************************************************************************************
 
 

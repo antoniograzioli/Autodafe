@@ -5,6 +5,7 @@
 //**************************************************************************************
 
 #include "Autodafe.hpp"
+#include "dsp/digital.hpp"
 
 struct SEQ8 : Module {
 	enum ParamIds {

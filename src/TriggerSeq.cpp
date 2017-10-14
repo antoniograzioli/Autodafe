@@ -1,11 +1,12 @@
 //**************************************************************************************
-//8x16 Trigger Sequencer Module for VCV Rack by Autodafe http://www.autodafe.net
+//8-Steps Sequencer Module for VCV Rack by Autodafe http://www.autodafe.net
 //
 //Based on code taken from the Fundamentals plugins by Andrew Belt http://www.vcvrack.com
 //
 //**************************************************************************************
 
 #include "Autodafe.hpp"
+#include "dsp/digital.hpp"
 
 
 
@@ -247,7 +248,7 @@ TriggerSeqWidget::TriggerSeqWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/TriggerSeq.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/TriggerSeq.svg")));
 		addChild(panel);
 	}
 

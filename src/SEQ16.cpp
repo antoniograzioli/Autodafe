@@ -6,6 +6,7 @@
 
 
 #include "Autodafe.hpp"
+#include "dsp/digital.hpp"
 
 struct SEQ16 : Module {
 	enum ParamIds {
@@ -182,7 +183,7 @@ SEQ16Widget::SEQ16Widget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/SEQ16.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/SEQ16.svg")));
 		addChild(panel);
 	}
 
