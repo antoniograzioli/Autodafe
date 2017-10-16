@@ -7,32 +7,6 @@
 
 #include "Autodafe.hpp"
 
-struct FormantFilter : Module {
-	enum ParamIds {
-		VOWEL_PARAM,
-		
-		ATTEN_PARAM,
-		NUM_PARAMS
-	};
-	enum InputIds {
-		INPUT,
-		CV_VOWEL,
-		NUM_INPUTS
-	};
-	enum OutputIds {
-		OUTPUT,
-		NUM_OUTPUTS
-	};
-
-	FormantFilter();
-	void step();
-};
- 
-FormantFilter::FormantFilter() {
-	params.resize(NUM_PARAMS);
-	inputs.resize(NUM_INPUTS);
-	outputs.resize(NUM_OUTPUTS);
-}
 
 
 
@@ -45,7 +19,6 @@ double CosineInterpolate(
    mu2 = (1-cos(mu*M_PI))/2;
    return(y1*(1-mu2)+y2*mu2);
 }
-
 
 /*
 Public source code by alex@smartelectronix.com
@@ -147,8 +120,15 @@ CosineInterpolate(-0.929252233 , -0.910251753,0.5),
 	}
 };
 //---------------------------------------------------------------------------------
-static double memory[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
 //---------------------------------------------------------------------------------
+
+ 
+struct FFilter {
+
+ double memory[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+	
 float formant_filter(float in, int vowelnum, float tone)
 {
 	float res = (float)(coeff[vowelnum][0] * in/2 +
@@ -176,6 +156,47 @@ float formant_filter(float in, int vowelnum, float tone)
 	return res;
 }
 
+};
+
+
+struct FormantFilter : Module {
+	enum ParamIds {
+		VOWEL_PARAM,
+		
+		ATTEN_PARAM,
+		NUM_PARAMS
+	};
+	enum InputIds {
+		INPUT,
+		CV_VOWEL,
+		NUM_INPUTS
+	};
+	enum OutputIds {
+		OUTPUT,
+		NUM_OUTPUTS
+	};
+
+	FormantFilter();
+
+	FFilter *ffilter = new FFilter();
+
+
+	void step();
+};
+ 
+FormantFilter::FormantFilter() {
+	params.resize(NUM_PARAMS);
+	inputs.resize(NUM_INPUTS);
+	outputs.resize(NUM_OUTPUTS);
+
+
+}
+
+
+float ffilterout;
+
+
+
 void FormantFilter::step() {
 	float in = inputs[INPUT].value / 5.0;
 	
@@ -183,7 +204,12 @@ void FormantFilter::step() {
 	
 	float cv = clampf(inputs[CV_VOWEL].value * params[ATTEN_PARAM].value, 0, 8) ;
 	
-	outputs[OUTPUT].value= 5.0* formant_filter(in,clampf((vowel+cv), 0, 8), 0);
+	ffilterout= ffilter->formant_filter(in,clampf((vowel+cv), 0, 8), 0);
+
+
+	outputs[OUTPUT].value= 5.0*ffilterout; 
+
+
 }
 
 
