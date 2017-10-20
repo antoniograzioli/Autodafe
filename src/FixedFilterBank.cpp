@@ -77,7 +77,9 @@ float out;
 
 void FixedFilter::step() {
 	
-	
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif
 
 	float input = inputs[INPUT].value / 5.0;
 	

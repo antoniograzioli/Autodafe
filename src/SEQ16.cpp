@@ -76,8 +76,11 @@ struct SEQ16 : Module {
 			gateState[i] = !!json_integer_value(gateJ);
 		}
 	}
-
+#ifdef v_dev
+	void reset() {
+#else
 	void initialize() {
+#endif
 		for (int i = 0; i < 16; i++) {
 			gateState[i] = false;
 		}
@@ -98,6 +101,11 @@ SEQ16::SEQ16() {
 }
 
 void SEQ16::step() {
+
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif
+
 	const float lightLambda = 0.075;
 	// Run
 	if (runningTrigger.process(params[RUN_PARAM].value)) {

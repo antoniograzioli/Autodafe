@@ -85,7 +85,9 @@ float maxfreq = 12000;
 
 void MultiModeFilter::step() {
 	
-	
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif	
 
 	float input = inputs[INPUT].value / 5.0;
 	float drive = params[DRIVE_PARAM].value + inputs[DRIVE_INPUT].value / 10.0;
@@ -114,34 +116,34 @@ void MultiModeFilter::step() {
 	npFilter->setFilterType(5);
 
 	
-lpFilter->setCutoffFreq(cutoff);
-hpFilter->setCutoffFreq(cutoff); 
-bpFilter->setCutoffFreq(cutoff);
-npFilter->setCutoffFreq(cutoff);
+	lpFilter->setCutoffFreq(cutoff);
+	hpFilter->setCutoffFreq(cutoff); 
+	bpFilter->setCutoffFreq(cutoff);
+	npFilter->setCutoffFreq(cutoff);
 
 
-lpFilter->setResonance(res);
-hpFilter->setResonance(res);
-bpFilter->setResonance(res);
-npFilter->setResonance(res);
-
-
-
-
-
-lpFilter->setSampleRate(gSampleRate);
-hpFilter->setSampleRate(gSampleRate);
-bpFilter->setSampleRate(gSampleRate);
-npFilter->setSampleRate(gSampleRate);
+	lpFilter->setResonance(res);
+	hpFilter->setResonance(res);
+	bpFilter->setResonance(res);
+	npFilter->setResonance(res);
 
 
 
 
 
-outLP = lpFilter->processAudioSample(input,1);
-outHP = hpFilter->processAudioSample(input,1);
-outBP = bpFilter->processAudioSample(input,1);
-outNP = npFilter->processAudioSample(input,1);
+	lpFilter->setSampleRate(gSampleRate);
+	hpFilter->setSampleRate(gSampleRate);
+	bpFilter->setSampleRate(gSampleRate);
+	npFilter->setSampleRate(gSampleRate);
+
+
+
+
+
+	outLP = lpFilter->processAudioSample(input,1);
+	outHP = hpFilter->processAudioSample(input,1);
+	outBP = bpFilter->processAudioSample(input,1);
+	outNP = npFilter->processAudioSample(input,1);
 
 
 

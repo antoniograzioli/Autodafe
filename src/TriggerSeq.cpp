@@ -115,9 +115,11 @@ for (int z = 0; z < 8; z++) {
 			}
 		}
 	}
-
+#ifdef v_dev
+	void reset() {
+#else
 	void initialize() {
-		
+#endif		
 		for (int z = 0; z < 8; z++) {
 			for (int i = 0; i < 16; i++) {
 			
@@ -148,6 +150,10 @@ TriggerSeq::TriggerSeq() {
 
 void TriggerSeq::step() {
 	
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif
+
 	float gate[8] = { 0 };
 	
 	const float lightLambda = 0.05;

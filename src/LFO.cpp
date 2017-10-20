@@ -73,6 +73,11 @@ LFO::LFO() {
 }
 
 void LFO::step() {
+
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif
+
 	bool analog = params[MODE_PARAM].value < 1.0;
 	// TODO Soft sync features
 	bool soft = params[SYNC_PARAM].value < 1.0;

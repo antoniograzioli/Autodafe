@@ -41,9 +41,11 @@ struct ClockDivider : Module {
 	SchmittTrigger reset_trig;
 
     float lights[5] = {0};
-
+#ifdef v_dev
+	void reset() {
+#else
 	void initialize() {
-
+#endif
 		lights[0] = 0.0;
 		lights[1] = 0.0;
 		lights[2] = 0.0;
@@ -87,6 +89,10 @@ int divider8 = 8;
 int divider16 = 16;
 int divider32 = 32;
 void ClockDivider::step() {
+	
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif
 
 	bool reset = false;
 
