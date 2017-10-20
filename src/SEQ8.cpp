@@ -76,7 +76,7 @@ struct SEQ8 : Module {
 		}
 	}
 
-	void initialize() {
+	void reset() {
 		for (int i = 0; i < 8; i++) {
 			gateState[i] = false;
 		}

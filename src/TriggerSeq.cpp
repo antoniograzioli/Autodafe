@@ -116,7 +116,7 @@ for (int z = 0; z < 8; z++) {
 		}
 	}
 
-	void initialize() {
+	void reset() {
 		
 		for (int z = 0; z < 8; z++) {
 			for (int i = 0; i < 16; i++) {

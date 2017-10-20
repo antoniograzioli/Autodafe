@@ -77,7 +77,7 @@ struct SEQ16 : Module {
 		}
 	}
 
-	void initialize() {
+	void reset() {
 		for (int i = 0; i < 16; i++) {
 			gateState[i] = false;
 		}

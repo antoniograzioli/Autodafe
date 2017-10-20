@@ -42,7 +42,7 @@ struct ClockDivider : Module {
 
     float lights[5] = {0};
 
-	void initialize() {
+	void reset() {
 
 		lights[0] = 0.0;
 		lights[1] = 0.0;
