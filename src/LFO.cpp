@@ -81,7 +81,7 @@ void LFO::step() {
 		// Adjust pitch slew
 		if (++pitchSlewIndex > 32) {
 			const float pitchSlewTau = 100.0; // Time constant for leaky integrator in seconds
-			pitchSlew += (randomNormal() - pitchSlew / pitchSlewTau) / gSampleRate;
+			pitchSlew += (randomNormal() - pitchSlew / pitchSlewTau) / engineGetSampleRate();
 			pitchSlewIndex = 0;
 		}
 	}
@@ -110,7 +110,7 @@ void LFO::step() {
 	float pw = clampf(params[PW_PARAM].value + params[PW_CV_PARAM].value * inputs[PW_INPUT].value / 10.0, pwMin, 1.0 - pwMin);
 
 	// Advance phase
-	float deltaPhase = clampf(freq / gSampleRate, 1e-6, 0.5);
+	float deltaPhase = clampf(freq / engineGetSampleRate(), 1e-6, 0.5);
 
 	// Detect sync
 	int syncIndex = -1; // Index in the oversample loop where sync occurs [0, OVERSAMPLE)
@@ -135,7 +135,7 @@ void LFO::step() {
 	float tri[OVERSAMPLE];
 	float saw[OVERSAMPLE];
 	float sqr[OVERSAMPLE];
-	sqrFilter.setCutoff(40.0 / gSampleRate);
+	sqrFilter.setCutoff(40.0 / engineGetSampleRate());
 
 	for (int i = 0; i < OVERSAMPLE; i++) {
 		if (syncIndex == i) {

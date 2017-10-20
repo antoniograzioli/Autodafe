@@ -129,10 +129,10 @@ npFilter->setResonance(res);
 
 
 
-lpFilter->setSampleRate(gSampleRate);
-hpFilter->setSampleRate(gSampleRate);
-bpFilter->setSampleRate(gSampleRate);
-npFilter->setSampleRate(gSampleRate);
+lpFilter->setSampleRate(engineGetSampleRate());
+hpFilter->setSampleRate(engineGetSampleRate());
+bpFilter->setSampleRate(engineGetSampleRate());
+npFilter->setSampleRate(engineGetSampleRate());
 
 
 

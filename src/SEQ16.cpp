@@ -118,7 +118,7 @@ void SEQ16::step() {
 		else {
 			// Internal clock
 			float clockTime = powf(2.0, params[CLOCK_PARAM].value + inputs[CLOCK_INPUT].value);
-			phase += clockTime / gSampleRate;
+			phase += clockTime / engineGetSampleRate();
 			if (phase >= 1.0) {
 				phase -= 1.0;
 				nextStep = true;
@@ -144,7 +144,7 @@ void SEQ16::step() {
 		stepLights[index] = 1.0;
 	}
 
-	resetLight -= resetLight / lightLambda / gSampleRate;
+	resetLight -= resetLight / lightLambda / engineGetSampleRate();
 
 	// Gate buttons
 	for (int i = 0; i < 16; i++) {
@@ -153,7 +153,7 @@ void SEQ16::step() {
 		}
 		float gate = (i == index && gateState[i] >= 1.0) ? 10.0 : 0.0;
 		outputs[GATE_OUTPUT + i].value= gate;
-		stepLights[i] -= stepLights[i] / lightLambda / gSampleRate;
+		stepLights[i] -= stepLights[i] / lightLambda / engineGetSampleRate();
 		gateLights[i] = (gateState[i] >= 1.0) ? 1.0 - stepLights[i] : stepLights[i];
 	}
 

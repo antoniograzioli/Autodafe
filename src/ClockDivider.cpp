@@ -146,7 +146,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[0] -= lights[0] / lightLambda / gSampleRate;
+			lights[0] -= lights[0] / lightLambda / engineGetSampleRate();
 		}
 		
 	}
@@ -167,7 +167,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[1] -= lights[1] / lightLambda / gSampleRate;
+			lights[1] -= lights[1] / lightLambda / engineGetSampleRate();
 		}
 		
 	}
@@ -188,7 +188,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[2] -= lights[2] / lightLambda / gSampleRate;
+			lights[2] -= lights[2] / lightLambda / engineGetSampleRate();
 		}
 	
 	}
@@ -209,7 +209,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[3] -= lights[3] / lightLambda / gSampleRate;
+			lights[3] -= lights[3] / lightLambda / engineGetSampleRate();
 		}
 		
 	}
@@ -230,7 +230,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[4] -= lights[4] / lightLambda / gSampleRate;
+			lights[4] -= lights[4] / lightLambda / engineGetSampleRate();
 		}
 		
 	}
