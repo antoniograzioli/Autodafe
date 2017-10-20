@@ -41,9 +41,11 @@ struct ClockDivider : Module {
 	SchmittTrigger reset_trig;
 
     float lights[5] = {0};
-
+#ifdef v_dev
 	void reset() {
-
+#else
+	void initialize() {
+#endif
 		lights[0] = 0.0;
 		lights[1] = 0.0;
 		lights[2] = 0.0;
@@ -87,6 +89,10 @@ int divider8 = 8;
 int divider16 = 16;
 int divider32 = 32;
 void ClockDivider::step() {
+	
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif
 
 	bool reset = false;
 
@@ -146,7 +152,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[0] -= lights[0] / lightLambda / engineGetSampleRate();
+			lights[0] -= lights[0] / lightLambda / gSampleRate;
 		}
 		
 	}
@@ -167,7 +173,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[1] -= lights[1] / lightLambda / engineGetSampleRate();
+			lights[1] -= lights[1] / lightLambda / gSampleRate;
 		}
 		
 	}
@@ -188,7 +194,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[2] -= lights[2] / lightLambda / engineGetSampleRate();
+			lights[2] -= lights[2] / lightLambda / gSampleRate;
 		}
 	
 	}
@@ -209,7 +215,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[3] -= lights[3] / lightLambda / engineGetSampleRate();
+			lights[3] -= lights[3] / lightLambda / gSampleRate;
 		}
 		
 	}
@@ -230,7 +236,7 @@ void ClockDivider::step() {
 		}
 		else
 		{
-			lights[4] -= lights[4] / lightLambda / engineGetSampleRate();
+			lights[4] -= lights[4] / lightLambda / gSampleRate;
 		}
 		
 	}

@@ -75,8 +75,11 @@ struct SEQ8 : Module {
 			gateState[i] = !!json_integer_value(gateJ);
 		}
 	}
-
+#ifdef v_dev
 	void reset() {
+#else
+	void initialize() {
+#endif
 		for (int i = 0; i < 8; i++) {
 			gateState[i] = false;
 		}
@@ -97,6 +100,11 @@ SEQ8::SEQ8() {
 }
 
 void SEQ8::step() {
+
+#ifdef v_dev
+	float gSampleRate = engineGetSampleRate();
+#endif
+
 	const float lightLambda = 0.075;
 	// Run
 	if (runningTrigger.process(params[RUN_PARAM].value)) {
@@ -117,7 +125,7 @@ void SEQ8::step() {
 		else {
 			// Internal clock
 			float clockTime = powf(2.0, params[CLOCK_PARAM].value + inputs[CLOCK_INPUT].value);
-			phase += clockTime / engineGetSampleRate();
+			phase += clockTime / gSampleRate;
 			if (phase >= 1.0) {
 				phase -= 1.0;
 				nextStep = true;
@@ -143,7 +151,7 @@ void SEQ8::step() {
 		stepLights[index] = 1.0;
 	}
 
-	resetLight -= resetLight / lightLambda / engineGetSampleRate();
+	resetLight -= resetLight / lightLambda / gSampleRate;
 
 	// Gate buttons
 	for (int i = 0; i < 8; i++) {
@@ -152,7 +160,7 @@ void SEQ8::step() {
 		}
 		float gate = (i == index && gateState[i] >= 1.0) ? 10.0 : 0.0;
 		outputs[GATE_OUTPUT + i].value= gate;
-		stepLights[i] -= stepLights[i] / lightLambda / engineGetSampleRate();
+		stepLights[i] -= stepLights[i] / lightLambda / gSampleRate;
 		gateLights[i] = (gateState[i] >= 1.0) ? 1.0 - stepLights[i] : stepLights[i];
 	}
 
