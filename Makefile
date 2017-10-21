@@ -3,6 +3,8 @@ SOURCES = $(wildcard src/*.cpp)
 
 include ../../plugin.mk
 
+include ../../plugin.mk
+
 
 dist: all
 	mkdir -p dist/Autodafe

@@ -40,40 +40,40 @@ Multiple18::Multiple18() {
 
 void Multiple18::step() {
 	
-	float IN1 = getf(inputs[INPUT1]);
+	float IN1 = inputs[INPUT1].value;
 	
 
 	// Set outputs
-	if (outputs[OUT11]) {
-		*outputs[OUT11] = IN1;
+	if (outputs[OUT11].active) {
+		outputs[OUT11].value = IN1;
 	}
 	
-	if (outputs[OUT12]) {
-		*outputs[OUT12] = IN1;
+	if (outputs[OUT12].active) {
+		outputs[OUT12].value = IN1;
 	}
 
-	if (outputs[OUT13]) {
-		*outputs[OUT13] = IN1;
+	if (outputs[OUT13].active) {
+		outputs[OUT13].value= IN1;
 	}
 
-	if (outputs[OUT14]) {
-		*outputs[OUT14] = IN1;
+	if (outputs[OUT14].active) {
+		outputs[OUT14].value = IN1;
 	}
 
-	if (outputs[OUT15]) {
-		*outputs[OUT15] = IN1;
+	if (outputs[OUT15].active) {
+		outputs[OUT15].value = IN1;
 	}
 
-	if (outputs[OUT16]) {
-		*outputs[OUT16] = IN1;
+	if (outputs[OUT16].active) {
+		outputs[OUT16].value = IN1;
 	}
 
-	if (outputs[OUT17]) {
-		*outputs[OUT17] = IN1;
+	if (outputs[OUT17].active) {
+		outputs[OUT17].value = IN1;
 	}
 
-	if (outputs[OUT18]) {
-		*outputs[OUT18] = IN1;
+	if (outputs[OUT18].active) {
+		outputs[OUT18].value = IN1;
 	}
 
 
@@ -88,7 +88,7 @@ Multiple18Widget::Multiple18Widget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/Multiple18.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Multiple18.svg")));
 		addChild(panel);
 	}
 

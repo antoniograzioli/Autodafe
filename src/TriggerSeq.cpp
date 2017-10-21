@@ -6,6 +6,7 @@
 //**************************************************************************************
 
 #include "Autodafe.hpp"
+#include "dsp/digital.hpp"
 
 
 
@@ -115,7 +116,7 @@ for (int z = 0; z < 8; z++) {
 		}
 	}
 
-	void initialize() {
+	void reset() {
 		
 		for (int z = 0; z < 8; z++) {
 			for (int i = 0; i < 16; i++) {
@@ -152,7 +153,7 @@ void TriggerSeq::step() {
 	const float lightLambda = 0.05;
 	
 		// Run
-		if (runningTrigger.process(params[RUN_PARAM])) {
+		if (runningTrigger.process(params[RUN_PARAM].value)) {
 			running = !running;
 		}
 		runningLight = running ? 1.0 : 0.0;
@@ -160,17 +161,17 @@ void TriggerSeq::step() {
 		bool nextStep = false;
 
 		if (running) {
-			if (inputs[EXT_CLOCK_INPUT]) {
+			if (inputs[EXT_CLOCK_INPUT].active) {
 				// External clock
-				if (clockTrigger.process(*inputs[EXT_CLOCK_INPUT])) {
+				if (clockTrigger.process(inputs[EXT_CLOCK_INPUT].value)) {
 					phase = 0.0;
 					nextStep = true;
 				}
 			}
 			else {
 				// Internal clock
-				float clockTime = powf(2.0, params[CLOCK_PARAM] + getf(inputs[CLOCK_INPUT]));
-				phase += clockTime / gSampleRate;
+				float clockTime = powf(2.0, params[CLOCK_PARAM].value+ inputs[CLOCK_INPUT].value);
+				phase += clockTime / engineGetSampleRate();
 				if (phase >= 1.0) {
 					phase -= 1.0;
 					nextStep = true;
@@ -179,7 +180,7 @@ void TriggerSeq::step() {
 		}
 
 		// Reset
-		if (resetTrigger.process(params[RESET_PARAM] + getf(inputs[RESET_INPUT]))) {
+		if (resetTrigger.process(params[RESET_PARAM].value + inputs[RESET_INPUT].value)) {
 			phase = 0.0;
 			index = 999;
 			nextStep = true;
@@ -189,7 +190,7 @@ void TriggerSeq::step() {
 		if (nextStep)	{
 
 			// Advance step
-			int numSteps = clampi(roundf(params[STEPS_PARAM] + getf(inputs[STEPS_INPUT])), 1, 16);
+			int numSteps = clampi(roundf(params[STEPS_PARAM].value + inputs[STEPS_INPUT].value), 1, 16);
 			index += 1;
 							if (index >= numSteps) {
 								index = 0;
@@ -202,7 +203,7 @@ void TriggerSeq::step() {
 			
 
 
-		resetLight -= resetLight / lightLambda / gSampleRate;
+		resetLight -= resetLight / lightLambda / engineGetSampleRate();
 
 
 		// Gate buttons
@@ -211,7 +212,7 @@ void TriggerSeq::step() {
 
 		for (int i = 0; i < 16; i++) {
 
-			if (gateTriggers[z][i].process(params[GATE_PARAM + z*16+i])) {
+			if (gateTriggers[z][i].process(params[GATE_PARAM + z*16+i].value)) {
 				gateState[z][i] = !gateState[z][i];
 
 			}
@@ -219,8 +220,8 @@ void TriggerSeq::step() {
 			
 
 			gate[z] = (gateState[z][index] >= 1.0) && !nextStep ? 10.0 : 0.0;
-			setf(outputs[GATES_OUTPUT + z], gate[z]);
-			stepLights[z][i] -= stepLights[z][i] / lightLambda / gSampleRate;
+			outputs[GATES_OUTPUT + z].value= gate[z];
+			stepLights[z][i] -= stepLights[z][i] / lightLambda / engineGetSampleRate();
 			gateLights[z][i] = (gateState[z][i] >= 1.0) ? 1.0 - stepLights[z][i] : stepLights[z][i];
 
 			
@@ -234,11 +235,16 @@ void TriggerSeq::step() {
 	
 }
 
-TriggerSeqWidget::TriggerSeqWidget() {
-	TriggerSeq *module = new TriggerSeq();
-	setModule(module);
-	box.size = Vec(15*45, 380);
 
+
+ 
+     
+    
+TriggerSeqWidget::TriggerSeqWidget() { 
+	TriggerSeq *module = new TriggerSeq();
+	setModule(module);    
+	box.size = Vec(15*45, 380);
+ 
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -281,6 +287,7 @@ TriggerSeqWidget::TriggerSeqWidget() {
 	for (int i = 0; i < 16; i++) {
 		//Lighst and Button Matrix
 			addParam(createParam<LEDButton>(Vec(portX[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
+        //addParam(createParam<AutodafeButton>(Vec(portX[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
         
 			addChild(createValueLight<SmallLight<GreenValueLight>>(Vec(portX[i] + 7, 140 + 25 * z + 4), &module->gateLights[z][i]));
 		}

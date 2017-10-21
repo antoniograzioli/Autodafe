@@ -54,12 +54,12 @@ float decimate(float i, long int bits, float rate)
 
 void BitCrusher::step() {
 	
-	float in = getf(inputs[INPUT]) / 5.0;
-	long int bits = params[BITS_PARAM]*16;
-	float rate = params[RATE_PARAM];
-	float coeff = getf(inputs[CV_BITS]) * params[ATTEN_PARAM] *8/ 5.0;
+	float in = inputs[INPUT].value / 5.0;
+	long int bits = params[BITS_PARAM].value *16;
+	float rate = params[RATE_PARAM].value ;
+	float coeff = inputs[CV_BITS].value  * params[ATTEN_PARAM].value  *8/ 5.0;
 	
-	setf(outputs[OUTPUT], 5.0* decimate(in, bits-coeff, rate));
+	outputs[OUTPUT].value = 5.0* decimate(in, bits-coeff, rate);
 
 }
 
@@ -78,7 +78,10 @@ BitCrusherWidget::BitCrusherWidget() {
 		//USING PNG
 		//panel->backgroundImage = Image::load("plugins/Autodafe/res/BitCrusher.png");
 		//USING SVG
-		panel->setBackground(SVG::load("plugins/Autodafe/res/BitCrusher.svg"));
+		
+
+			panel->setBackground(SVG::load(assetPlugin(plugin, "res/BitCrusher.svg")));
+
 		addChild(panel);
 	}
 
