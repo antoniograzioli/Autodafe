@@ -83,14 +83,14 @@ void FixedFilter::step() {
 	
 
 
-	bq1->setBiquad(bq_type_peak, 75.0 / engineGetSampleRate(), 5, params[EQ1].value);
-	bq2->setBiquad(bq_type_peak, 125.0 / engineGetSampleRate(), 5, params[EQ2].value);
-	bq3->setBiquad(bq_type_peak, 250.0 / engineGetSampleRate(), 5, params[EQ3].value);
-	bq4->setBiquad(bq_type_peak, 500.0 / engineGetSampleRate(), 5, params[EQ4].value);
-	bq5->setBiquad(bq_type_peak, 1000.0 / engineGetSampleRate(), 5, params[EQ5].value);
-	bq6->setBiquad(bq_type_peak, 2000.0 / engineGetSampleRate(), 5, params[EQ6].value);
-	bq7->setBiquad(bq_type_peak, 4000.0 / engineGetSampleRate(), 5, params[EQ7].value);
-	bq8->setBiquad(bq_type_peak, 8000.0 / engineGetSampleRate(), 5, params[EQ8].value);
+	bq1->setBiquad(bq_type_peak, 75.0 / gSampleRate, 5, params[EQ1].value);
+	bq2->setBiquad(bq_type_peak, 125.0 / gSampleRate, 5, params[EQ2].value);
+	bq3->setBiquad(bq_type_peak, 250.0 / gSampleRate, 5, params[EQ3].value);
+	bq4->setBiquad(bq_type_peak, 500.0 / gSampleRate, 5, params[EQ4].value);
+	bq5->setBiquad(bq_type_peak, 1000.0 / gSampleRate, 5, params[EQ5].value);
+	bq6->setBiquad(bq_type_peak, 2000.0 / gSampleRate, 5, params[EQ6].value);
+	bq7->setBiquad(bq_type_peak, 4000.0 / gSampleRate, 5, params[EQ7].value);
+	bq8->setBiquad(bq_type_peak, 8000.0 / gSampleRate, 5, params[EQ8].value);
 
 	
 	

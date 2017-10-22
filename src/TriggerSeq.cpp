@@ -116,7 +116,7 @@ for (int z = 0; z < 8; z++) {
 		}
 	}
 
-	void reset() {
+	void initialize() {
 		
 		for (int z = 0; z < 8; z++) {
 			for (int i = 0; i < 16; i++) {
@@ -171,7 +171,7 @@ void TriggerSeq::step() {
 			else {
 				// Internal clock
 				float clockTime = powf(2.0, params[CLOCK_PARAM].value+ inputs[CLOCK_INPUT].value);
-				phase += clockTime / engineGetSampleRate();
+				phase += clockTime / gSampleRate;
 				if (phase >= 1.0) {
 					phase -= 1.0;
 					nextStep = true;
@@ -203,7 +203,7 @@ void TriggerSeq::step() {
 			
 
 
-		resetLight -= resetLight / lightLambda / engineGetSampleRate();
+		resetLight -= resetLight / lightLambda / gSampleRate;
 
 
 		// Gate buttons
@@ -221,7 +221,7 @@ void TriggerSeq::step() {
 
 			gate[z] = (gateState[z][index] >= 1.0) && !nextStep ? 10.0 : 0.0;
 			outputs[GATES_OUTPUT + z].value= gate[z];
-			stepLights[z][i] -= stepLights[z][i] / lightLambda / engineGetSampleRate();
+			stepLights[z][i] -= stepLights[z][i] / lightLambda / gSampleRate;
 			gateLights[z][i] = (gateState[z][i] >= 1.0) ? 1.0 - stepLights[z][i] : stepLights[z][i];
 
 			
@@ -248,7 +248,7 @@ TriggerSeqWidget::TriggerSeqWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/TriggerSeq.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/TriggerSeq.svg")));
 		addChild(panel);
 	}
 

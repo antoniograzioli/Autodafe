@@ -1,6 +1,6 @@
 # Autodafe Module Pack for VCV Rack
 
-Autodafe Module Pack for VCV rack contains 11 modules:
+Autodafe Module Pack for VCV rack contains 13 modules:
 
 LFO module with CV Input
 
@@ -14,6 +14,10 @@ Clock Divider
 
 Fixed Filter Bank
 
+Formant Filter
+
+Multimode Filter
+
 Foldback distortion
 
 Bitcrusher
@@ -21,4 +25,4 @@ Bitcrusher
 Phaser
 
 
-My VCV Rack Modules Pack works on Mac/PC/Linux using Rack 0.3.2 (current release at the moment), not with 0.3.1. 
+My VCV Rack Modules Pack works on Mac/PC/Linux using Rack 0.4.0 (current release at the moment), not with 0.3.2 or earlier. 

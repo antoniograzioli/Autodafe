@@ -1,15 +1,6 @@
 #include "Autodafe.hpp"
 #include <math.h>
-#include "dsp/digital.hpp"
-#include "dsp/decimator.hpp"
-#include "dsp/fft.hpp"
-#include "dsp/filter.hpp"
-#include "dsp/fir.hpp"
-#include "dsp/frame.hpp"
-#include "dsp/minblep.hpp"
-#include "dsp/ode.hpp"
-#include "dsp/ringbuffer.hpp"
-#include "dsp/samplerate.hpp"
+
 
 
 
@@ -33,7 +24,8 @@ void init(rack::Plugin *p) {
 		createModel<FoldBackWidget>(plugin, "Foldback Distortion", "Foldback Distortion");
 		createModel<BitCrusherWidget>(plugin, "BitCrusher", "BitCrusher");
 		createModel<PhaserFxWidget>(plugin, "Phaser", "Phaser");
-	
+		
+		
 		
 		
 		

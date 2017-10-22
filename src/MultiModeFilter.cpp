@@ -129,10 +129,10 @@ npFilter->setResonance(res);
 
 
 
-lpFilter->setSampleRate(engineGetSampleRate());
-hpFilter->setSampleRate(engineGetSampleRate());
-bpFilter->setSampleRate(engineGetSampleRate());
-npFilter->setSampleRate(engineGetSampleRate());
+lpFilter->setSampleRate(gSampleRate);
+hpFilter->setSampleRate(gSampleRate);
+bpFilter->setSampleRate(gSampleRate);
+npFilter->setSampleRate(gSampleRate);
 
 
 
@@ -165,7 +165,7 @@ MultiModeFilterWidget::MultiModeFilterWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/MultiModeFilter.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin,"res/MultiModeFilter.svg")));
 		addChild(panel);
 	}
 
