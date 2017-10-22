@@ -3,7 +3,7 @@ SOURCES = $(wildcard src/*.cpp)
 
 include ../../plugin.mk
 
-include ../../plugin.mk
+
 
 
 dist: all
