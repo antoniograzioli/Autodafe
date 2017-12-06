@@ -73,7 +73,13 @@ BitCrusherWidget::BitCrusherWidget() {
 		
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
+<<<<<<< HEAD
 		
+=======
+		//USING PNG
+		//panel->backgroundImage = Image::load("plugins/Autodafe/res/BitCrusher.png");
+		//USING SVG
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		
 
 			panel->setBackground(SVG::load(assetPlugin(plugin, "res/BitCrusher.svg")));

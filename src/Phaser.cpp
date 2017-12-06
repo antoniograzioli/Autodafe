@@ -187,6 +187,7 @@ PhaserFxWidget::PhaserFxWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(1, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
       
+<<<<<<< HEAD
 	addParam(createParam<AutodafeKnobGreen>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
     //addParam(createParam<AutodafeKnob>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
 
@@ -194,6 +195,15 @@ PhaserFxWidget::PhaserFxWidget() {
     //addParam(createParam<AutodafeKnob>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
 
 	addParam(createParam<AutodafeKnobGreen>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
+=======
+	addParam(createParam<Davies1900hBlackKnob>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
+    //addParam(createParam<AutodafeKnob>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
+
+	addParam(createParam<Davies1900hBlackKnob>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
+    //addParam(createParam<AutodafeKnob>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
+
+	addParam(createParam<Davies1900hBlackKnob>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
     //addParam(createParam<AutodafeKnob>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
 
 	addInput(createInput<PJ301MPort>(Vec(10, 320), module, PhaserFx::INPUT));

@@ -119,7 +119,11 @@ bool running = true;
 			gateMode = (GateMode)json_integer_value(gateModeJ);
 	}
 
+<<<<<<< HEAD
 	void reset() override {
+=======
+	void reset() {
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		for (int i = 0; i < 16; i++) {
 			gateState[i] = false;
 		}
@@ -203,16 +207,20 @@ outputs[CLOCK_OUT].value=1;
 	}
 
 	resetLight -= resetLight / lightLambda / engineGetSampleRate();
+<<<<<<< HEAD
 
 	bool pulse = gatePulse.process(1.0 / engineGetSampleRate());
 
 
+=======
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 
 	// Gate buttons
 	for (int i = 0; i < 16; i++) {
 		if (gateTriggers[i].process(params[GATE_PARAM + i].value)) {
 			gateState[i] = !gateState[i];
 		}
+<<<<<<< HEAD
 		bool gateOn = (running && i == index && gateState[i]);
 		if (gateMode == TRIGGER)
 			gateOn = gateOn && pulse;
@@ -232,6 +240,12 @@ outputs[CLOCK_OUT].value=1;
 
 		stepLights[i] -= stepLights[i] / lightLambda / engineGetSampleRate();
 		lights[GATE_LIGHTS + i].value = gateState[i] ? 1.0 - stepLights[i] : stepLights[i];
+=======
+		float gate = (i == index && gateState[i] >= 1.0) ? 10.0 : 0.0;
+		outputs[GATE_OUTPUT + i].value= gate;
+		stepLights[i] -= stepLights[i] / lightLambda / engineGetSampleRate();
+		gateLights[i] = (gateState[i] >= 1.0) ? 1.0 - stepLights[i] : stepLights[i];
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 	}
 
 	// Rows
@@ -239,6 +253,7 @@ outputs[CLOCK_OUT].value=1;
 	float row2 = params[ROW2_PARAM + index].value;
 	float row3 = params[ROW3_PARAM + index].value;
 
+<<<<<<< HEAD
 	bool gatesOn = (running && gateState[index]);
 	if (gateMode == TRIGGER)
 		gatesOn = gatesOn && pulse;
@@ -254,6 +269,18 @@ outputs[CLOCK_OUT].value=1;
 	lights[ROW_LIGHTS].value = row1 / 10.0;
 	lights[ROW_LIGHTS + 1].value = row2 / 10.0;
 	lights[ROW_LIGHTS + 2].value = row3 / 10.0;
+=======
+	float gates = (gateState[index] >= 1.0) && !nextStep ? 10.0 : 0.0;
+	
+	outputs[ROW1_OUTPUT].value= row1;
+	outputs[ROW2_OUTPUT].value = row2;
+	outputs[ROW3_OUTPUT].value= row3;
+	outputs[GATES_OUTPUT].value= gates;
+	gatesLight = (gateState[index] >= 1.0) ? 1.0 : 0.0;
+	rowLights[0] = row1;
+	rowLights[1] = row2;
+	rowLights[2] = row3;
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 }
 
 struct AutodafePurpleLight : ModuleLightWidget {

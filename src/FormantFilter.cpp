@@ -231,12 +231,20 @@ FormantFilterWidget::FormantFilterWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(5, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
 
+<<<<<<< HEAD
 	addParam(createParam<AutodafeKnobBlueBig>(Vec(18,61), module, FormantFilter::VOWEL_PARAM, 0.0, 9.0, 0.0));
 	
 	addParam(createParam<AutodafeKnobBlue>(Vec(27, 190), module, FormantFilter::ATTEN_PARAM, -1.0, 1.0, 0.0));
 	
 	addInput(createInput<PJ301MPort>(Vec(32, 150), module, FormantFilter::CV_VOWEL));
 
+=======
+	addParam(createParam<Davies1900hLargeBlackKnob>(Vec(18,61), module, FormantFilter::VOWEL_PARAM, 0.0, 9.0, 0.0));
+	
+	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 220), module, FormantFilter::ATTEN_PARAM, -1.0, 1.0, 0.0));
+	
+	addInput(createInput<PJ301MPort>(Vec(32, 170), module, FormantFilter::CV_VOWEL));
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 	addInput(createInput<PJ301MPort>(Vec(10, 320), module, FormantFilter::INPUT));
 
 	addOutput(createOutput<PJ301MPort>(Vec(48, 320), module, FormantFilter::OUTPUT));

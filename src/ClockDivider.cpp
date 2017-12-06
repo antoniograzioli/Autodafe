@@ -101,6 +101,7 @@ void ClockDivider::step() {
 
 	bool reset = false;
 
+<<<<<<< HEAD
 float deltaTime = 1.0 / engineGetSampleRate();
 	blinkPhase += deltaTime;
 if (blinkPhase >= 1.0)
@@ -108,6 +109,8 @@ if (blinkPhase >= 1.0)
 
 
 
+=======
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 	if (reset_trig.process(params[RESET_PARAM].value))
 	{
 		clock2Count = 0;
@@ -165,14 +168,22 @@ if (blinkPhase >= 1.0)
 		}
 		else
 		{
+<<<<<<< HEAD
 		lights[LIGHT1].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
+=======
+			lights[0] -= lights[0] / lightLambda / engineGetSampleRate();
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		}
 		
 	}
 	else
 	{
 		outputs[OUT2].value= 0.0;
+<<<<<<< HEAD
 		lights[LIGHT1].value = 0.0;
+=======
+		lights[0] = 0.0;
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		
 	}
 
@@ -186,14 +197,22 @@ if (blinkPhase >= 1.0)
 		}
 		else
 		{
+<<<<<<< HEAD
 			lights[LIGHT2].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
+=======
+			lights[1] -= lights[1] / lightLambda / engineGetSampleRate();
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		}
 		
 	}
 	else
 	{
 		outputs[OUT4].value= 0.0;
+<<<<<<< HEAD
 		lights[LIGHT2].value = 0.0;
+=======
+		lights[1] = 0.0;
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		
 	}
 
@@ -207,14 +226,22 @@ if (blinkPhase >= 1.0)
 		}
 		else
 		{
+<<<<<<< HEAD
 			lights[LIGHT3].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
+=======
+			lights[2] -= lights[2] / lightLambda / engineGetSampleRate();
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		}
 	
 	}
 	else
 	{
 		outputs[OUT8].value= 0.0;
+<<<<<<< HEAD
 		lights[LIGHT3].value = 0.0;
+=======
+		lights[2] = 0.0;
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		
 	}
 
@@ -228,14 +255,22 @@ if (blinkPhase >= 1.0)
 		}
 		else
 		{
+<<<<<<< HEAD
 			lights[LIGHT4].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
+=======
+			lights[3] -= lights[3] / lightLambda / engineGetSampleRate();
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		}
 		
 	}
 	else
 	{
 		outputs[OUT16].value= 0.0;
+<<<<<<< HEAD
 		lights[LIGHT4].value = 0.0;
+=======
+		lights[3] = 0.0;
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 	
 	}
 
@@ -249,14 +284,22 @@ if (blinkPhase >= 1.0)
 		}
 		else
 		{
+<<<<<<< HEAD
 				lights[LIGHT5].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
+=======
+			lights[4] -= lights[4] / lightLambda / engineGetSampleRate();
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		}
 		
 	}
 	else
 	{
 		outputs[OUT32].value= 0.0;
+<<<<<<< HEAD
 		lights[LIGHT5].value = 0.0;
+=======
+		lights[4] = 0.0;
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 	
 	}
 	 

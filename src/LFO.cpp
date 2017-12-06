@@ -192,7 +192,11 @@ void LFO::step() {
 	if (outputs[SQR_OUTPUT].active)
 		outputs[SQR_OUTPUT].value = 5.0 * sqrDecimator.process(sqr);
 
+<<<<<<< HEAD
 	
+=======
+	lights[0] = rescalef(pitch, -48.0, 48.0, -1.0, 1.0);
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 }
 
 

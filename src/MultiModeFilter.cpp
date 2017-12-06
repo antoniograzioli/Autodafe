@@ -1,9 +1,15 @@
 //**************************************************************************************
 //Clock Divider Module for VCV Rack by Autodafe http://www.autodafe.net
 //
+<<<<<<< HEAD
 //  Based on code created by Created by Nigel Bluemon 
 //  EarLevel Engineering: earlevel.com
 //  Copyright 2012 Nigel Bluemon
+=======
+//  Based on code created by Created by Nigel Redmon 
+//  EarLevel Engineering: earlevel.com
+//  Copyright 2012 Nigel Redmon
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 //  http://www.earlevel.com/main/2012/11/26/biquad-c-source-code/
 //**************************************************************************************
 
@@ -165,9 +171,13 @@ MultiModeFilterWidget::MultiModeFilterWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
+<<<<<<< HEAD
 		panel->setBackground(SVG::load(assetPlugin(plugin, "res/MultiModeFilter.svg")));
 
 
+=======
+		panel->setBackground(SVG::load("plugins/Autodafe/res/MultiModeFilter.svg"));
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		addChild(panel);
 	}
 
@@ -176,6 +186,7 @@ MultiModeFilterWidget::MultiModeFilterWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
+<<<<<<< HEAD
 	addParam(createParam<AutodafeKnobBlueBig>(Vec(68, 61), module, MultiModeFilter::FREQ_PARAM, minfreq, maxfreq, maxfreq));
 	
 	addParam(createParam<AutodafeKnobBlue>(Vec(111, 143), module, MultiModeFilter::RES_PARAM, 0.0, 0.99, 0.0));
@@ -185,6 +196,17 @@ MultiModeFilterWidget::MultiModeFilterWidget() {
 
 
 	addParam(createParam<AutodafeKnobBlue>(Vec(111, 208), module, MultiModeFilter::DRIVE_PARAM, 0.0, 1.0, 0.0));
+=======
+	addParam(createParam<Davies1900hLargeBlackKnob>(Vec(68, 61), module, MultiModeFilter::FREQ_PARAM, minfreq, maxfreq, maxfreq));
+	
+	addParam(createParam<Davies1900hBlackKnob>(Vec(111, 143), module, MultiModeFilter::RES_PARAM, 0.0, 0.99, 0.0));
+	addParam(createParam<Davies1900hBlackKnob>(Vec(43, 143), module, MultiModeFilter::FREQ_CV_PARAM, -1.0, 1.0, 0.0));
+
+	addParam(createParam<Davies1900hBlackKnob>(Vec(43, 208), module, MultiModeFilter::FREQ_CV_PARAM2, -1.0, 1.0, 0.0));
+
+
+	addParam(createParam<Davies1900hBlackKnob>(Vec(111, 208), module, MultiModeFilter::DRIVE_PARAM, 0.0, 1.0, 0.0));
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 
 
 
@@ -202,4 +224,8 @@ MultiModeFilterWidget::MultiModeFilterWidget() {
 	addOutput(createOutput<PJ301MPort>(Vec(122, 320), module, MultiModeFilter::OUTBPF));
 	addOutput(createOutput<PJ301MPort>(Vec(159, 320), module, MultiModeFilter::OUTNPF));
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254

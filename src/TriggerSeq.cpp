@@ -287,6 +287,13 @@ if(inputs[START_INPUT].value>0){running=true;}
 					
 						}	
 
+<<<<<<< HEAD
+=======
+			gate[z] = (gateState[z][index] >= 1.0) && !nextStep ? 10.0 : 0.0;
+			outputs[GATES_OUTPUT + z].value= gate[z];
+			stepLights[z][i] -= stepLights[z][i] / lightLambda / engineGetSampleRate();
+			gateLights[z][i] = (gateState[z][i] >= 1.0) ? 1.0 - stepLights[z][i] : stepLights[z][i];
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 
 
 
@@ -321,17 +328,25 @@ if(inputs[START_INPUT].value>0){running=true;}
 
 
 
+<<<<<<< HEAD
  struct AutodafePurpleLight : ModuleLightWidget {
 	AutodafePurpleLight() {
 		addBaseColor(nvgRGB(0x89, 0x13, 0xC4));
 	}
 };
+=======
+ 
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
      
     
 TriggerSeqWidget::TriggerSeqWidget() { 
 	TriggerSeq *module = new TriggerSeq();
 	setModule(module);    
+<<<<<<< HEAD
 	box.size = Vec(15*37, 380);
+=======
+	box.size = Vec(15*45, 380);
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
  
 	{
 		SVGPanel *panel = new SVGPanel();
@@ -413,7 +428,12 @@ addParam(createParam<BtnTrigSequencerSmall>(Vec(4, 140 + 25 * z +2), module, Tri
 		
 	for (int i = 0; i < 16; i++) {
 		//Lighst and Button Matrix
+<<<<<<< HEAD
 		addParam(createParam<BtnTrigSequencer>(Vec(portX2[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
+=======
+			addParam(createParam<LEDButton>(Vec(portX[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
+        //addParam(createParam<AutodafeButton>(Vec(portX[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
+>>>>>>> b21f5674d48ade4815d1098f8437472628d31254
         
 addParam(createParam<BtnTrigSequencerSmall>(Vec(portX2[i] + 5, 140  + 25  * 8-4.0), module, TriggerSeq::COLUMN_PARAM + i, 0.0, 1.0, 0.0));
 

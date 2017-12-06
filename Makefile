@@ -9,6 +9,8 @@ LDFLAGS += -Lsrc/Gamma/build/lib -lGamma
 include ../../plugin.mk
 
 
+
+
 dist: all
 	mkdir -p dist/Autodafe
 	cp LICENSE* dist/Autodafe/
