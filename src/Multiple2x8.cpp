@@ -3,11 +3,12 @@
 //
 //**************************************************************************************
 
-
 #include "Autodafe.hpp"
 
+
 struct Multiple28 : Module{
-	enum ParamIds {	
+	enum ParamIds {
+		
 		NUM_PARAMS
 	};
 	enum InputIds {
@@ -36,6 +37,7 @@ struct Multiple28 : Module{
 	};
 
 	
+
 	Multiple28();
 	void step();
 };
@@ -50,78 +52,84 @@ Multiple28::Multiple28() {
 
 void Multiple28::step() {
 	
-	float IN1 = getf(inputs[INPUT1]);
-	float IN2 = getf(inputs[INPUT2]);
+	float IN1 = inputs[INPUT1].value;
+	float IN2 = inputs[INPUT2].value;
 
 	// Set outputs
-	//FIRST COLUMN
-	if (outputs[OUT11]) {
-		*outputs[OUT11] = IN1;
+	//first column
+	if (outputs[OUT11].active) {
+		outputs[OUT11].value = IN1;
 	}
 	
-	if (outputs[OUT12]) {
-		*outputs[OUT12] = IN1;
+	if (outputs[OUT12].active) {
+		outputs[OUT12].value = IN1;
 	}
 
-	if (outputs[OUT13]) {
-		*outputs[OUT13] = IN1;
+	if (outputs[OUT13].active) {
+		outputs[OUT13].value = IN1;
 	}
 
-	if (outputs[OUT14]) {
-		*outputs[OUT14] = IN1;
+	if (outputs[OUT14].active) {
+		outputs[OUT14].value = IN1;
 	}
 
-	if (outputs[OUT15]) {
-		*outputs[OUT15] = IN1;
+	if (outputs[OUT15].active) {
+		outputs[OUT15].value = IN1;
 	}
 
-	if (outputs[OUT16]) {
-		*outputs[OUT16] = IN1;
+	if (outputs[OUT16].active) {
+		outputs[OUT16].value = IN1;
 	}
 
-	if (outputs[OUT17]) {
-		*outputs[OUT17] = IN1;
+	if (outputs[OUT17].active) {
+		outputs[OUT17].value = IN1;
 	}
 
-	if (outputs[OUT18]) {
-		*outputs[OUT18] = IN1;
+	if (outputs[OUT18].active) {
+		outputs[OUT18].value = IN1;
 	}
 
 
 	//SECOND COLUMN
-	if (outputs[OUT21]) {
-		*outputs[OUT21] = IN2;
+	if (outputs[OUT21].active) {
+		outputs[OUT21].value = IN2;
 	}
 
-	if (outputs[OUT22]) {
-		*outputs[OUT22] = IN2;
+	if (outputs[OUT22].active) {
+		outputs[OUT22].value = IN2;
 	}
 
-	if (outputs[OUT23]) {
-		*outputs[OUT23] = IN2;
+	if (outputs[OUT23].active) {
+		outputs[OUT23].value = IN2;
 	}
 
-	if (outputs[OUT24]) {
-		*outputs[OUT24] = IN2;
+	if (outputs[OUT24].active) {
+		outputs[OUT24].value = IN2;
 	}
 
-	if (outputs[OUT25]) {
-		*outputs[OUT25] = IN2;
+	if (outputs[OUT25].active) {
+		outputs[OUT25].value = IN2;
 	}
 
-	if (outputs[OUT26]) {
-		*outputs[OUT26] = IN2;
+	if (outputs[OUT26].active) {
+		outputs[OUT26].value = IN2;
 	}
 
-	if (outputs[OUT27]) {
-		*outputs[OUT27] = IN2;
+	if (outputs[OUT27].active) {
+		outputs[OUT27].value = IN2;
 	}
 
-	if (outputs[OUT28]) {
-		*outputs[OUT28] = IN2;
+	if (outputs[OUT28].active) {
+		outputs[OUT28].value = IN2;
 	}
+
+	
+
+
+
 	
 }
+
 
 Multiple28Widget::Multiple28Widget() {
 	Multiple28 *module = new Multiple28();
@@ -131,7 +139,7 @@ Multiple28Widget::Multiple28Widget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/Multiple28.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Multiple28.svg")));
 		addChild(panel);
 	}
 
@@ -162,7 +170,6 @@ Multiple28Widget::Multiple28Widget() {
 	addOutput(createOutput<PJ3410Port>(Vec(50, 235), module, Multiple28::OUT26));
 	addOutput(createOutput<PJ3410Port>(Vec(50, 270), module, Multiple28::OUT27));
 	addOutput(createOutput<PJ3410Port>(Vec(50, 305), module, Multiple28::OUT28));
+
 	
 }
-
-

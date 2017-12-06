@@ -58,13 +58,13 @@ float foldback(float in, float threshold)
 
 void FoldBack::step() {
 	
-	float in = getf(inputs[INPUT]) / 5.0;
-	float threshold = params[THRESHOLD_PARAM];
-	float coeff = getf(inputs[CV_THRESHOLD]) * params[ATTEN_PARAM] / 5.0;
+	float in = inputs[INPUT].value / 5.0;
+	float threshold = params[THRESHOLD_PARAM].value;
+	float coeff = inputs[CV_THRESHOLD].value * params[ATTEN_PARAM].value / 5.0;
 
 
 
-	setf(outputs[OUTPUT], 5.0* foldback(in, threshold+coeff));
+	outputs[OUTPUT].value= 5.0* foldback(in, threshold+coeff);
 
 
 
@@ -81,7 +81,8 @@ FoldBackWidget::FoldBackWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/FoldBack.svg"));
+		
+				panel->setBackground(SVG::load(assetPlugin(plugin, "res/FoldBack.svg")));
 		addChild(panel);
 	}
 
@@ -90,11 +91,11 @@ FoldBackWidget::FoldBackWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(5, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
 
-	addParam(createParam<Davies1900hLargeBlackKnob>(Vec(18, 61), module, FoldBack::THRESHOLD_PARAM, 0.1, 1.0, 1.0));
+	addParam(createParam<AutodafeKnobGreenBig>(Vec(18, 61), module, FoldBack::THRESHOLD_PARAM, 0.1, 1.0, 1.0));
 
 	addInput(createInput<PJ301MPort>(Vec(32, 150), module, FoldBack::CV_THRESHOLD));
 
-	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 190), module, FoldBack::ATTEN_PARAM, -1.0, 1.0, 0.0));
+	addParam(createParam<AutodafeKnobGreen>(Vec(27, 190), module, FoldBack::ATTEN_PARAM, -1.0, 1.0, 0.0));
 		addInput(createInput<PJ301MPort>(Vec(10, 320), module, FoldBack::INPUT));
 
 	addOutput(createOutput<PJ301MPort>(Vec(48, 320), module, FoldBack::OUTPUT));

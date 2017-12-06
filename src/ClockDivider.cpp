@@ -6,6 +6,7 @@
 
 
 #include "Autodafe.hpp"
+#include "dsp/digital.hpp"
 struct ClockDivider : Module {
 	enum ParamIds {
 		RESET_PARAM,
@@ -25,6 +26,22 @@ struct ClockDivider : Module {
 		OUT32,
 		NUM_OUTPUTS
 	};
+
+
+enum LightIds {
+		LIGHT1,
+		LIGHT2,
+		LIGHT3,
+		LIGHT4,
+		LIGHT5,
+
+		NUM_LIGHTS
+	};
+
+	float phase = 0.0;
+	float blinkPhase = 0.0;
+
+
 	int clock2Count = 0;
 	int clock4Count = 0;
 	int clock8Count = 0;
@@ -39,21 +56,16 @@ struct ClockDivider : Module {
 
 	SchmittTrigger reset_trig;
 
-    float lights[5] = {0};
+  
 
-	void initialize() {
+	void reset() {
 
-		lights[0] = 0.0;
-		lights[1] = 0.0;
-		lights[2] = 0.0;
-		lights[3] = 0.0;
-        lights[4] = 0.0;
 
 
 	}
 
-	ClockDivider();
-	void step();
+	ClockDivider() ; 
+	void step() ;
 };
 
 
@@ -62,7 +74,7 @@ struct ClockDivider : Module {
 
 
 
-ClockDivider::ClockDivider() {
+ClockDivider::ClockDivider() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS) {
 	params.resize(NUM_PARAMS);
 	inputs.resize(NUM_INPUTS);
 	outputs.resize(NUM_OUTPUTS);
@@ -78,7 +90,7 @@ ClockDivider::ClockDivider() {
 
 
 
-const float lightLambda = 0.075;
+
 int divider2 = 2;
 int divider4 = 4;
 
@@ -89,7 +101,14 @@ void ClockDivider::step() {
 
 	bool reset = false;
 
-	if (reset_trig.process(params[RESET_PARAM]))
+float deltaTime = 1.0 / engineGetSampleRate();
+	blinkPhase += deltaTime;
+if (blinkPhase >= 1.0)
+		blinkPhase -= 1.0;
+
+
+
+	if (reset_trig.process(params[RESET_PARAM].value))
 	{
 		clock2Count = 0;
 		clock4Count = 0;
@@ -100,35 +119,35 @@ void ClockDivider::step() {
 		reset = true;
 	}
 
-	if ((clock2Count >= divider2) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock2Count >= divider2) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock2Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock4Count >= divider4) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock4Count >= divider4) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock4Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock8Count >= divider8) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock8Count >= divider8) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock8Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock16Count >= divider16) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock16Count >= divider16) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock16Count = 0;
 		
 		reset = true;
 	}
 
-	if ((clock32Count >= divider32) || (reset_trig.process(getf(inputs[RESET_INPUT]))))
+	if ((clock32Count >= divider32) || (reset_trig.process(inputs[RESET_INPUT].value)))
 	{
 		clock32Count = 0;
 	
@@ -136,107 +155,108 @@ void ClockDivider::step() {
 	}
 
 
+
 	if (clock2Count < divider2 / 2)
 	{
-		setf(outputs[OUT2], 10.0);
+		outputs[OUT2].value= 10.0;
 		if (clock2Count == 0)
 		{
-			lights[0] = 1.0;
+			lights[LIGHT1].value = 1.0;
 		}
 		else
 		{
-			lights[0] -= lights[0] / lightLambda / gSampleRate;
+		lights[LIGHT1].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
 		}
 		
 	}
 	else
 	{
-		setf(outputs[OUT2], 0.0);
-		lights[0] = 0.0;
+		outputs[OUT2].value= 0.0;
+		lights[LIGHT1].value = 0.0;
 		
 	}
 
 
 	if (clock4Count < divider4 / 2)
 	{
-		setf(outputs[OUT4], 10.0);
+		outputs[OUT4].value= 10.0;
 		if (clock4Count == 0)
 		{
-			lights[1] = 1.0;
+			lights[LIGHT2].value = 1.0;
 		}
 		else
 		{
-			lights[1] -= lights[1] / lightLambda / gSampleRate;
+			lights[LIGHT2].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
 		}
 		
 	}
 	else
 	{
-		setf(outputs[OUT4], 0.0);
-		lights[1] = 0.0;
+		outputs[OUT4].value= 0.0;
+		lights[LIGHT2].value = 0.0;
 		
 	}
 
 
 	if (clock8Count < divider8 / 2)
 	{
-		setf(outputs[OUT8], 10.0);
+		outputs[OUT8].value= 10.0;
 		if (clock8Count == 0)
 		{
-			lights[2] = 1.0;
+			lights[LIGHT3].value = 1.0;
 		}
 		else
 		{
-			lights[2] -= lights[2] / lightLambda / gSampleRate;
+			lights[LIGHT3].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
 		}
 	
 	}
 	else
 	{
-		setf(outputs[OUT8], 0.0);
-		lights[2] = 0.0;
+		outputs[OUT8].value= 0.0;
+		lights[LIGHT3].value = 0.0;
 		
 	}
 
 
 	if (clock16Count < divider16 / 2)
 	{
-		setf(outputs[OUT16], 10.0);
+		outputs[OUT16].value= 10.0;
 		if (clock16Count == 0)
 		{
-			lights[3] = 1.0;
+			lights[LIGHT4].value = 1.0;
 		}
 		else
 		{
-			lights[3] -= lights[3] / lightLambda / gSampleRate;
+			lights[LIGHT4].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
 		}
 		
 	}
 	else
 	{
-		setf(outputs[OUT16], 0.0);
-		lights[3] = 0.0;
+		outputs[OUT16].value= 0.0;
+		lights[LIGHT4].value = 0.0;
 	
 	}
 
 
 	if (clock32Count < divider32 / 2)
 	{
-		setf(outputs[OUT32], 10.0);
+		outputs[OUT32].value= 10.0;
 		if (clock16Count == 0)
 		{
-			lights[4] = 1.0;
+			lights[LIGHT5].value=1.0;
 		}
 		else
 		{
-			lights[4] -= lights[4] / lightLambda / gSampleRate;
+				lights[LIGHT5].value = (blinkPhase < 0.5) ? 1.0 : 0.0;
 		}
 		
 	}
 	else
 	{
-		setf(outputs[OUT32], 0.0);
-		lights[4] = 0.0;
+		outputs[OUT32].value= 0.0;
+		lights[LIGHT5].value = 0.0;
 	
 	}
 	 
@@ -246,7 +266,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger2.process(getf(inputs[CLOCK_INPUT])) && clock2Count <= divider2)
+		if (trigger2.process(inputs[CLOCK_INPUT].value) && clock2Count <= divider2)
 		{
 			clock2Count++;
 		
@@ -256,7 +276,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger4.process(getf(inputs[CLOCK_INPUT])) && clock4Count <= divider4)
+		if (trigger4.process(inputs[CLOCK_INPUT].value) && clock4Count <= divider4)
 		{
 			clock4Count++;
 			
@@ -266,7 +286,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger8.process(getf(inputs[CLOCK_INPUT])) && clock8Count <= divider8)
+		if (trigger8.process(inputs[CLOCK_INPUT].value) && clock8Count <= divider8)
 		{
 			clock8Count++;
 		
@@ -276,7 +296,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger16.process(getf(inputs[CLOCK_INPUT])) && clock16Count <= divider16)
+		if (trigger16.process(inputs[CLOCK_INPUT].value) && clock16Count <= divider16)
 		{
 			clock16Count++;
 		
@@ -286,7 +306,7 @@ void ClockDivider::step() {
 
 	if (reset == false)
 	{
-		if (trigger32.process(getf(inputs[CLOCK_INPUT])) && clock32Count <= divider32)
+		if (trigger32.process(inputs[CLOCK_INPUT].value) && clock32Count <= divider32)
 		{
 			clock32Count++;
 			
@@ -299,12 +319,13 @@ void ClockDivider::step() {
 ClockDividerWidget::ClockDividerWidget() {
 	ClockDivider *module = new ClockDivider();
 	setModule(module);
-	box.size = Vec(15 * 4, 380);
+	box.size = Vec(4 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT);
 
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/Autodafe/res/ClockDivider.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/ClockDivider.svg")));
+		
 		addChild(panel);
 	}
 
@@ -321,10 +342,12 @@ ClockDividerWidget::ClockDividerWidget() {
 	addOutput(createOutput<PJ3410Port>(Vec(2, 240), module, ClockDivider::OUT16));
 	addOutput(createOutput<PJ3410Port>(Vec(2, 280), module, ClockDivider::OUT32));
 
-	addChild(createValueLight<SmallLight<GreenRedPolarityLight>>(Vec(38, 125), &module->lights[0]));
-	addChild(createValueLight<SmallLight<GreenRedPolarityLight>>(Vec(38, 165), &module->lights[1]));
-	addChild(createValueLight<SmallLight<GreenRedPolarityLight>>(Vec(38, 205), &module->lights[2]));
-	addChild(createValueLight<SmallLight<GreenRedPolarityLight>>(Vec(38, 245), &module->lights[3]));
-	addChild(createValueLight<SmallLight<GreenRedPolarityLight>>(Vec(38, 285), &module->lights[4]));
+
+
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 125), module, ClockDivider::LIGHT1));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 165), module, ClockDivider::LIGHT2));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 205), module, ClockDivider::LIGHT3));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 245), module, ClockDivider::LIGHT4));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 285), module, ClockDivider::LIGHT5));
 
 }

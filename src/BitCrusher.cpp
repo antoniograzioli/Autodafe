@@ -54,12 +54,12 @@ float decimate(float i, long int bits, float rate)
 
 void BitCrusher::step() {
 	
-	float in = getf(inputs[INPUT]) / 5.0;
-	long int bits = params[BITS_PARAM]*16;
-	float rate = params[RATE_PARAM];
-	float coeff = getf(inputs[CV_BITS]) * params[ATTEN_PARAM] *8/ 5.0;
+	float in = inputs[INPUT].value / 5.0;
+	long int bits = params[BITS_PARAM].value *16;
+	float rate = params[RATE_PARAM].value ;
+	float coeff = inputs[CV_BITS].value  * params[ATTEN_PARAM].value  *8/ 5.0;
 	
-	setf(outputs[OUTPUT], 5.0* decimate(in, bits-coeff, rate));
+	outputs[OUTPUT].value = 5.0* decimate(in, bits-coeff, rate);
 
 }
 
@@ -70,15 +70,14 @@ BitCrusherWidget::BitCrusherWidget() {
 	box.size = Vec(15 * 6, 380);
 
 	{
-		//USING PNG
-		//Panel *panel = new LightPanel();
-		//USING SVG
+		
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		//USING PNG
-		//panel->backgroundImage = Image::load("plugins/Autodafe/res/BitCrusher.png");
-		//USING SVG
-		panel->setBackground(SVG::load("plugins/Autodafe/res/BitCrusher.svg"));
+		
+		
+
+			panel->setBackground(SVG::load(assetPlugin(plugin, "res/BitCrusher.svg")));
+
 		addChild(panel);
 	}
 
@@ -87,11 +86,11 @@ BitCrusherWidget::BitCrusherWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(5, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
 
-	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 51), module, BitCrusher::BITS_PARAM, 0.2, 1.0, 1.0));
-	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 111), module, BitCrusher::RATE_PARAM, 0.2, 1.0,1.0));
-	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 220), module, BitCrusher::ATTEN_PARAM, -1.0, 1.0, 0.0));
+	addParam(createParam<AutodafeKnobGreenBig>(Vec(20, 60), module, BitCrusher::BITS_PARAM, 0.2, 1.0, 1.0));
+	addParam(createParam<AutodafeKnobGreen>(Vec(27, 140), module, BitCrusher::RATE_PARAM, 0.2, 1.0,1.0));
+	addParam(createParam<AutodafeKnobGreen>(Vec(27, 250), module, BitCrusher::ATTEN_PARAM, -1.0, 1.0, 0.0));
 
-	addInput(createInput<PJ301MPort>(Vec(32, 170), module, BitCrusher::CV_BITS));
+	addInput(createInput<PJ301MPort>(Vec(32, 200), module, BitCrusher::CV_BITS));
 	addInput(createInput<PJ301MPort>(Vec(10, 320), module, BitCrusher::INPUT));
 	addOutput(createOutput<PJ301MPort>(Vec(48, 320), module, BitCrusher::OUTPUT));
 	
