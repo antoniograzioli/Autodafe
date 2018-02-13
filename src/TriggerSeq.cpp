@@ -1,5 +1,5 @@
 //**************************************************************************************
-//8-Steps Sequencer Module for VCV Rack by Autodafe http://www.autodafe.net
+//Trigger Sequencer Module for VCV Rack by Autodafe http://www.autodafe.net
 //
 //Based on code taken from the Fundamentals plugins by Andrew Belt http://www.vcvrack.com
 //
@@ -123,8 +123,8 @@ float stepLightsTop[16] ;
 
 	void fromJson(json_t *rootJtrigseq) {
 
-
-for (int z = 0; z < 8; z++) {
+//EMPTY EVERYTHING
+	for (int z = 0; z < 8; z++) {
 			
 			for (int i = 0; i < 16; i++) {
 				gateState[z][i] = false;
@@ -133,12 +133,9 @@ for (int z = 0; z < 8; z++) {
 		}
 
 
-
-
-
-
-		
+		//LOAD FROM FILE
 		json_t *gatesJtrigSeq = json_object_get(rootJtrigseq, "gatesTrigSeq");
+		
 		for (int z = 0; z < 8; z++) {
 			
 			for (int i = 0; i < 16; i++) {
@@ -165,7 +162,7 @@ for (int z = 0; z < 8; z++) {
 		for (int z = 0; z < 8; z++) {
 		for (int i = 0; i < 16; i++) {
 			
-				gateState[z][i] = (randomf() > 0.5);
+				gateState[z][i] = rand()%2;
 			}
 		}
 	}
@@ -255,68 +252,127 @@ if(inputs[START_INPUT].value>0){running=true;}
 
 		for (int z = 0; z < 8; z++) {
 
-		
+		//ROW BUTTONS		
+			if (rowTriggers[z].process(params[ROW_PARAM + z].value)) {
+				FullRow[z]=!FullRow[z];
+						
+
+				if (FullRow[z]){
+
+					gateState[z][0] = 1;
+					gateState[z][1] = 1;
+					gateState[z][2] = 1;
+					gateState[z][3] = 1;
+					gateState[z][4] = 1;
+					gateState[z][5] = 1;
+					gateState[z][6] = 1;
+					gateState[z][7] = 1;
+					gateState[z][8] = 1;
+					gateState[z][9] = 1;
+					gateState[z][10] = 1;
+					gateState[z][11] = 1;
+					gateState[z][12] = 1;
+					gateState[z][13] = 1;
+					gateState[z][14] = 1;
+					gateState[z][15] = 1;
+				}
+				else 
+				{
+
+					gateState[z][0] = 0;
+					gateState[z][1] = 0;
+					gateState[z][2] = 0;
+					gateState[z][3] = 0;
+					gateState[z][4] = 0;
+					gateState[z][5] = 0;
+					gateState[z][6] = 0;
+					gateState[z][7] = 0;
+					gateState[z][8] = 0;
+					gateState[z][9] = 0;
+					gateState[z][10] = 0;
+					gateState[z][11] = 0;
+					gateState[z][12] = 0;
+					gateState[z][13] = 0;
+					gateState[z][14] = 0;
+					gateState[z][15] = 0;
+				}
+
+
+
+
+						
+					
+						}
 
 
 		for (int i = 0; i < 16; i++) {
+
+
+
+
+
+	
+
+
+	
+
+
+					//COLUMN BUTTONS		
+			if (columnTriggers[i].process(params[COLUMN_PARAM + i].value)) {
+				FullColumn[i]=!FullColumn[i];
+
+
+				if (FullColumn[i]) {
+
+					gateState[0][i] = 1;
+					gateState[1][i] = 1;
+					gateState[2][i] = 1;
+					gateState[3][i] = 1;
+					gateState[4][i] = 1;
+					gateState[5][i] = 1;
+					gateState[6][i] = 1;
+					gateState[7][i] = 1;
+				}
+				else
+				{
+					gateState[0][i] = 0;
+					gateState[1][i] = 0;
+					gateState[2][i] = 0;
+					gateState[3][i] = 0;
+					gateState[4][i] = 0;
+					gateState[5][i] = 0;
+					gateState[6][i] = 0;
+					gateState[7][i] = 0;
+				}
+						
+					
+						}	
+
+
+
+
+
+			gate[z] = (gateState[z][index] >= 1.0) && !nextStep ? 10.0 : 0.0;
+			outputs[GATES_OUTPUT + z].value= gate[z];
+			
+			
+			
+
+			lights[GATES_LIGHTS +z*16+i].value = (gateState[z][i] >= 1.0) ? 1.0 : 0.0;
+
+
 
 			if (gateTriggers[z][i].process(params[GATE_PARAM + z*16+i].value)) {
 				gateState[z][i] = !gateState[z][i];
 		
 			}
-
-	
-
-
-	//ROW BUTTONS		
-			if (rowTriggers[z].process(params[ROW_PARAM + z].value)) {
-				FullRow[z]=!FullRow[z];
-						for (int i = 0; i < 16; i++) {
-							gateState[z][i] = FullRow[z];
-						}
-					
-						}
-
-
-					//ROW BUTTONS		
-			if (columnTriggers[i].process(params[COLUMN_PARAM + i].value)) {
-				FullColumn[i]=!FullColumn[i];
-						for (int z = 0; z< 8; z++) {
-							gateState[z][i] = FullColumn[i];
-						}
-					
-						}	
-
-<<<<<<< HEAD
-=======
-			gate[z] = (gateState[z][index] >= 1.0) && !nextStep ? 10.0 : 0.0;
-			outputs[GATES_OUTPUT + z].value= gate[z];
-			stepLights[z][i] -= stepLights[z][i] / lightLambda / engineGetSampleRate();
-			gateLights[z][i] = (gateState[z][i] >= 1.0) ? 1.0 - stepLights[z][i] : stepLights[z][i];
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
-
-
-
-
-
-			gate[z] = (gateState[z][index] >= 1.0) && !nextStep ? 10.0 : 0.0;
-			outputs[GATES_OUTPUT + z].value= gate[z];
-			
-			
-			//gateLights[z][i] = (gateState[z][i] >= 1.0) ? 1.0 - stepLights[z][i] : stepLights[z][i];
-
-			//lights[GATES_LIGHTS+z+i].value  = (gateState[z][i] >= 1.0) ? 1.0 - stepLights[z][i] : stepLights[z][i];
-
-			lights[GATES_LIGHTS +z*16+i].value = (gateState[z][i] >= 1.0) ? 1.0 : 0.0;
-
-//lights[GATES_LIGHTS +z*16+i].value = 1.0;
 		} 
 
 	lights[RESET_LIGHT].value = resetLight;
 		lights[GATE_LIGHTS + z].value  = (gateState[z][index] >= 1.0) ? 1.0 : 0.0;
 
 
-//stepLightsTop[index] -= stepLightsTop[index] / lightLambda / engineGetSampleRate();
+
 		
 		for (int y=0; y<16; y++){lights[STEP_LIGHTS + y].value=0;}
 
@@ -328,25 +384,17 @@ if(inputs[START_INPUT].value>0){running=true;}
 
 
 
-<<<<<<< HEAD
  struct AutodafePurpleLight : ModuleLightWidget {
 	AutodafePurpleLight() {
 		addBaseColor(nvgRGB(0x89, 0x13, 0xC4));
 	}
 };
-=======
- 
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
      
     
 TriggerSeqWidget::TriggerSeqWidget() { 
 	TriggerSeq *module = new TriggerSeq();
 	setModule(module);    
-<<<<<<< HEAD
 	box.size = Vec(15*37, 380);
-=======
-	box.size = Vec(15*45, 380);
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
  
 	{
 		SVGPanel *panel = new SVGPanel();
@@ -428,12 +476,7 @@ addParam(createParam<BtnTrigSequencerSmall>(Vec(4, 140 + 25 * z +2), module, Tri
 		
 	for (int i = 0; i < 16; i++) {
 		//Lighst and Button Matrix
-<<<<<<< HEAD
 		addParam(createParam<BtnTrigSequencer>(Vec(portX2[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
-=======
-			addParam(createParam<LEDButton>(Vec(portX[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
-        //addParam(createParam<AutodafeButton>(Vec(portX[i] + 2, 140  + 25  * z - 1), module, TriggerSeq::GATE_PARAM + z*16+i, 0.0, 1.0, 0.0));
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
         
 addParam(createParam<BtnTrigSequencerSmall>(Vec(portX2[i] + 5, 140  + 25  * 8-4.0), module, TriggerSeq::COLUMN_PARAM + i, 0.0, 1.0, 0.0));
 

@@ -143,8 +143,4 @@ FixedFilterWidget::FixedFilterWidget() {
 	
 		addOutput(createOutput<PJ301MPort>(Vec(85, 320), module, FixedFilter::OUT));
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254

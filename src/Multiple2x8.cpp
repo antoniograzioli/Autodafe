@@ -143,10 +143,10 @@ Multiple28Widget::Multiple28Widget() {
 		addChild(panel);
 	}
 
-	addChild(createScrew<ScrewBlack>(Vec(15, 0)));
-	addChild(createScrew<ScrewBlack>(Vec(15, 365)));
-	addChild(createScrew<ScrewBlack>(Vec(60, 0)));
-	addChild(createScrew<ScrewBlack>(Vec(60, 365)));
+	addChild(createScrew<ScrewSilver>(Vec(5, 0)));
+	addChild(createScrew<ScrewSilver>(Vec(5, 365)));
+	addChild(createScrew<ScrewSilver>(Vec(70, 0)));
+	addChild(createScrew<ScrewSilver>(Vec(70, 365)));
 
 	
 
@@ -172,8 +172,4 @@ Multiple28Widget::Multiple28Widget() {
 	addOutput(createOutput<PJ3410Port>(Vec(50, 305), module, Multiple28::OUT28));
 
 	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254

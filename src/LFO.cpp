@@ -104,7 +104,9 @@ void LFO::step() {
 		pitch += quadraticBipolar(params[FM_PARAM].value) * 12.0  *inputs[FM_INPUT].value;
 	}
 	float freq = 261.626 * powf(2.0, pitch / 12.0) / (250 + params[SLOW_FAST_PARAM].value * 250);
+	//printf("%f\n", freq);
 
+	
 	// Pulse width
 	const float pwMin = 0.01;
 	float pw = clampf(params[PW_PARAM].value + params[PW_CV_PARAM].value * inputs[PW_INPUT].value / 10.0, pwMin, 1.0 - pwMin);
@@ -192,11 +194,7 @@ void LFO::step() {
 	if (outputs[SQR_OUTPUT].active)
 		outputs[SQR_OUTPUT].value = 5.0 * sqrDecimator.process(sqr);
 
-<<<<<<< HEAD
 	
-=======
-	lights[0] = rescalef(pitch, -48.0, 48.0, -1.0, 1.0);
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 }
 
 

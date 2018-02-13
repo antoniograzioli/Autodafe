@@ -24,20 +24,35 @@ struct BitCrusher : Module {
 		NUM_OUTPUTS
 	};
 
+
+float y = 0, cnt = 0;
+float decimate(float i, long int bits, float rate);
+
 	BitCrusher();
+
+
 	void step();
+
+
+
 };
 
 BitCrusher::BitCrusher() {
 	params.resize(NUM_PARAMS);
 	inputs.resize(NUM_INPUTS);
 	outputs.resize(NUM_OUTPUTS);
+
+	
+
+
 }
 
-float y = 0, cnt = 0;
 
-float decimate(float i, long int bits, float rate)
+
+float BitCrusher::decimate(float i, long int bits, float rate)
 {
+
+
 
 	long int m = 1 << (bits - 1);
 
@@ -73,13 +88,7 @@ BitCrusherWidget::BitCrusherWidget() {
 		
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-<<<<<<< HEAD
 		
-=======
-		//USING PNG
-		//panel->backgroundImage = Image::load("plugins/Autodafe/res/BitCrusher.png");
-		//USING SVG
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		
 
 			panel->setBackground(SVG::load(assetPlugin(plugin, "res/BitCrusher.svg")));

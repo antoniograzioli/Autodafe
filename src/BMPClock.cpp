@@ -97,6 +97,8 @@ SchmittTrigger btndwn;
 SchmittTrigger btnupdec;
 SchmittTrigger btndwndec;
 
+PulseGenerator pulse;
+
 	float clock_phase = 0.f;
 	uint32_t tick = UINT32_MAX;
 
@@ -202,28 +204,28 @@ bpm=bpmint+bpmdec*0.1;
 
 
 		//DIVIDER
-		outputs[OUT_1].value = !(tick % 48u);
-		outputs[OUT_2].value = !(tick % 96u);
-		outputs[OUT_3].value = !(tick % 144u);
-		outputs[OUT_4].value = !(tick % 192u);
-		outputs[OUT_8].value = !(tick % 384u);
-		outputs[OUT_12].value = !(tick % 576u);
-		outputs[OUT_16].value = !(tick % 768u);
-		outputs[OUT_24].value = !(tick % 1152u);
+		outputs[OUT_1].value = !(tick % 48u)*5;
+		outputs[OUT_2].value = !(tick % 96u)*5;
+		outputs[OUT_3].value = !(tick % 144u)*5;
+		outputs[OUT_4].value = !(tick % 192u)*5;
+		outputs[OUT_8].value = !(tick % 384u)*5;
+		outputs[OUT_12].value = !(tick % 576u)*5;
+		outputs[OUT_16].value = !(tick % 768u)*5;
+		outputs[OUT_24].value = !(tick % 1152u)*5;
 
 		
 
 
 
 		//MULTIPLIER
-		outputs[OUT_1_1].value = !(tick % 48u);
-		outputs[OUT_1_2].value = !(tick % 24u);
-		outputs[OUT_1_3].value = !(tick % 36u);
-		outputs[OUT_1_4].value = !(tick % 12u);
-		outputs[OUT_1_8].value = !(tick % 6u);
-		outputs[OUT_1_12].value = !(tick % 4u);
-		outputs[OUT_1_16].value = !(tick % 3u);
-		outputs[OUT_1_24].value = !(tick % 2u);
+		outputs[OUT_1_1].value = !(tick % 48u)*5;
+		outputs[OUT_1_2].value = !(tick % 24u)*5;
+		outputs[OUT_1_3].value = !(tick % 36u)*5;
+		outputs[OUT_1_4].value = !(tick % 12u)*5;
+		outputs[OUT_1_8].value = !(tick % 6u)*5;
+		outputs[OUT_1_12].value = !(tick % 4u)*5;
+		outputs[OUT_1_16].value = !(tick % 3u)*5;
+		outputs[OUT_1_24].value = !(tick % 2u)*5;
 
 
 

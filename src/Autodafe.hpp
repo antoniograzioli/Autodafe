@@ -4,10 +4,7 @@
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 
 using namespace rack;
 
@@ -20,11 +17,7 @@ using namespace rack;
 extern Plugin *plugin;
 
 
-<<<<<<< HEAD
  
-=======
-
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 
 /////////////////////////////
 // CUSTOM KNOBS & GRAPHICS //
@@ -41,7 +34,6 @@ struct AutodafeKnobRed : SVGKnob {
 };
 
 
-<<<<<<< HEAD
 
 
 struct AutodafeKnobRedBig : SVGKnob {
@@ -55,8 +47,6 @@ struct AutodafeKnobRedBig : SVGKnob {
 
 
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 struct AutodafeKnobBlue : SVGKnob {
 	AutodafeKnobBlue() {
 		box.size = Vec(20, 20);
@@ -67,7 +57,6 @@ struct AutodafeKnobBlue : SVGKnob {
 };
 
 
-<<<<<<< HEAD
 struct AutodafeKnobBlueBig : SVGKnob {
 	AutodafeKnobBlueBig() {
 		box.size = Vec(35, 35);
@@ -79,8 +68,6 @@ struct AutodafeKnobBlueBig : SVGKnob {
 
 
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 struct AutodafeKnobGreen : SVGKnob {
 	AutodafeKnobGreen() {
 		box.size = Vec(20, 20);
@@ -91,7 +78,6 @@ struct AutodafeKnobGreen : SVGKnob {
 };
 
 
-<<<<<<< HEAD
 struct AutodafeKnobGreenBig : SVGKnob {
 	AutodafeKnobGreenBig() {
 		box.size = Vec(35, 35);
@@ -103,16 +89,6 @@ struct AutodafeKnobGreenBig : SVGKnob {
 
 
 
-=======
-struct AutodafeKnobGray : SVGKnob {
-	AutodafeKnobGray() {
-		box.size = Vec(20, 20);
-		minAngle = -0.75*M_PI;
-		maxAngle = 0.75*M_PI;
-		setSVG(SVG::load(assetPlugin(plugin, "res/AutodafeKnobGray.svg")));
-	}
-};
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 struct AutodafeKnobPurple : SVGKnob {
 	AutodafeKnobPurple() {
 		box.size = Vec(20, 20);
@@ -122,7 +98,6 @@ struct AutodafeKnobPurple : SVGKnob {
 	}
 };
 
-<<<<<<< HEAD
 
 struct AutodafeKnobPurpleSmall : SVGKnob {
 	AutodafeKnobPurpleSmall() {
@@ -214,14 +189,6 @@ struct AutodafeKnobBlackBig : SVGKnob {
 		minAngle = -0.75*M_PI;
 		maxAngle = 0.75*M_PI;
 		setSVG(SVG::load(assetPlugin(plugin, "res/AutodafeKnobBlackBig.svg")));
-=======
-struct AutodafeKnobPink : SVGKnob {
-	AutodafeKnobPink() {
-		box.size = Vec(20, 20);
-		minAngle = -0.75*M_PI;
-		maxAngle = 0.75*M_PI;
-		setSVG(SVG::load(assetPlugin(plugin, "res/AutodafeKnobPink.svg")));
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 	}
 };
 
@@ -236,7 +203,6 @@ struct AutodafeKnobOrange : SVGKnob {
 
 
 
-<<<<<<< HEAD
 struct AutodafeKnobOrangeBig : SVGKnob {
 	AutodafeKnobOrangeBig() {
 		box.size = Vec(35, 35);
@@ -248,8 +214,6 @@ struct AutodafeKnobOrangeBig : SVGKnob {
 
 
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 struct AutodafeKnobYellow : SVGKnob {
 	AutodafeKnobYellow() {
 		box.size = Vec(20, 20);
@@ -260,7 +224,6 @@ struct AutodafeKnobYellow : SVGKnob {
 };
 
 
-<<<<<<< HEAD
 
 
 struct AutodafeKnobYellowBig : SVGKnob {
@@ -278,8 +241,6 @@ struct AutodafeKnobYellowBig : SVGKnob {
 
 
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 struct AutodafeButton : SVGSwitch, MomentarySwitch {
     AutodafeButton() {
 
@@ -291,7 +252,6 @@ struct AutodafeButton : SVGSwitch, MomentarySwitch {
     } 
 };   
 
-<<<<<<< HEAD
 
 
 
@@ -368,8 +328,6 @@ struct BlackKey : SVGSwitch, MomentarySwitch {
 ///////////////////////////////////
 
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 
 
 struct LFOWidget : ModuleWidget {
@@ -380,8 +338,6 @@ struct LFOWidget : ModuleWidget {
 struct BPMClockWidget : ModuleWidget {
 	BPMClockWidget();
 };
-
-
 
 
 struct Multiple28Widget : ModuleWidget  {
@@ -451,13 +407,10 @@ struct FixedFilterWidget : ModuleWidget{
 
 
 
-<<<<<<< HEAD
 
 
 //// EFFECTS
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 struct PhaserFxWidget : ModuleWidget{
 	PhaserFxWidget();
 };
@@ -468,12 +421,34 @@ struct ChorusFxWidget : ModuleWidget{
 };
 
 
+struct FlangerFxWidget : ModuleWidget{
+	FlangerFxWidget();
+};
 
 
-
+struct EchoFxWidget : ModuleWidget{
+	EchoFxWidget();
+};
 
 struct ReverbFxWidget : ModuleWidget{
 	ReverbFxWidget();
+};
+
+
+struct PitchShifterFxWidget : ModuleWidget{
+	PitchShifterFxWidget();
+};
+
+
+
+struct CompressorWidget : ModuleWidget{
+	CompressorWidget();
+};
+
+
+
+struct KnobDemoWidget : ModuleWidget{
+	KnobDemoWidget();
 };
 
 
@@ -487,6 +462,56 @@ struct ReverbFxWidget : ModuleWidget{
 
 
 
+///OSCILLATORS
+
+struct WavesModelWidget : ModuleWidget{
+	WavesModelWidget();
+};
+
+
+
+struct SquareVCOModelWidget : ModuleWidget{
+	SquareVCOModelWidget();
+};
+
+
+
+struct AMVCOModelWidget : ModuleWidget{
+	AMVCOModelWidget();
+};
+
+
+struct FMVCOModelWidget : ModuleWidget{
+	FMVCOModelWidget();
+};
+
+
+struct CosineVCOModelWidget : ModuleWidget{
+	CosineVCOModelWidget();
+};
+
+
+
+struct OPERATORModelWidget : ModuleWidget{
+	OPERATORModelWidget();
+};
+
+
+struct DWOVCOModelWidget : ModuleWidget{
+	DWOVCOModelWidget();
+};
+
+
+
+
+struct SamplerModelWidget : ModuleWidget{
+	SamplerModelWidget();
+};
+struct DrumSamplerWidget : ModuleWidget{
+	DrumSamplerWidget();
+	Menu *createContextMenu() override;
+	
+};
 
 
 
@@ -501,18 +526,6 @@ struct ReverbFxWidget : ModuleWidget{
 struct KeyboardModelWidget : ModuleWidget{
 	KeyboardModelWidget();
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

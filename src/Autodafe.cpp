@@ -13,19 +13,15 @@
 
 
 
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 Plugin *plugin;
 
 void init(rack::Plugin *p) {
 	plugin = p;
 	plugin->slug = "Autodafe";
-<<<<<<< HEAD
 	
 	#ifdef VERSION
 	p->version = TOSTRING(VERSION);
@@ -42,48 +38,41 @@ void init(rack::Plugin *p) {
 		p->addModel(createModel<BPMClockWidget>("Autodafe", "BPM Clock", "BPM Clock", UTILITY_TAG, CLOCK_TAG));
 		p->addModel(createModel<ClockDividerWidget>("Autodafe",  "Clock Divider", "Clock Divider", UTILITY_TAG));
 	
-		p->addModel(createModel<SEQ8Widget>("Autodafe",  "8-Steps Sequencer", "8-Steps Sequencer", SEQUENCER_TAG));
-		p->addModel(createModel<SEQ16Widget>("Autodafe", "16-Steps Sequencer", "16-Steps Sequencer", SEQUENCER_TAG));
+		p->addModel(createModel<SEQ8Widget>("Autodafe",  "8-Step Sequencer", "8-Step Sequencer", SEQUENCER_TAG));
+		p->addModel(createModel<SEQ16Widget>("Autodafe", "16-Step Sequencer", "16-Step Sequencer", SEQUENCER_TAG));
 		p->addModel(createModel<TriggerSeqWidget>("Autodafe","8x16 Trigger Sequencer", "8x16 Trigger Sequencer", SEQUENCER_TAG));
-=======
-	plugin->name = "Autodafe";
-	plugin->homepageUrl = "https://www.autodafe.net";
-		createModel<LFOWidget>(plugin, "LFO", "LFO");
-		createModel<ClockDividerWidget>(plugin, "Clock Divider", "Clock Divider");
-		createModel<Multiple18Widget>(plugin, "Multiple 1x8", "Multiple 1x8");
-		createModel<Multiple28Widget>(plugin, "Multiple 2x8", "Multiple 2x8");
-		createModel<SEQ8Widget>(plugin, "8-Steps Sequencer", "8-Steps Sequencer");
-		createModel<SEQ16Widget>(plugin, "16-Steps Sequencer", "16-Steps Sequencer");
-		createModel<TriggerSeqWidget>(plugin, "8x16 Trigger Sequencer", "8x16 Trigger Sequencer");
-		createModel<FixedFilterWidget>(plugin, "Fixed Filter Bank", "Fixed Filter Bank");
-		createModel<MultiModeFilterWidget>(plugin, "MultiMode Filter", "MultiMode Filter ");
-		createModel<FormantFilterWidget>(plugin, "Formant Filter", "Formant Filter");
-		createModel<FoldBackWidget>(plugin, "Foldback Distortion", "Foldback Distortion");
-		createModel<BitCrusherWidget>(plugin, "BitCrusher", "BitCrusher");
-		createModel<PhaserFxWidget>(plugin, "Phaser", "Phaser");
-	
-		
-		
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
 		
 
 		p->addModel(createModel<FixedFilterWidget>("Autodafe", "Fixed Filter Bank", "Fixed Filter Bank", FILTER_TAG));
 		p->addModel(createModel<MultiModeFilterWidget>("Autodafe", "MultiMode Filter", "MultiMode Filter", FILTER_TAG));
 		p->addModel(createModel<FormantFilterWidget>("Autodafe", "Formant Filter", "Formant Filter", FILTER_TAG));
 		
-<<<<<<< HEAD
 
 		p->addModel(createModel<FoldBackWidget>("Autodafe",  "Foldback Distortion", "Foldback Distortion", EFFECT_TAG, WAVESHAPER_TAG, DISTORTION_TAG));
 		p->addModel(createModel<BitCrusherWidget>("Autodafe", "BitCrusher", "BitCrusher", EFFECT_TAG));
 		p->addModel(createModel<PhaserFxWidget>("Autodafe",  "Phaser", "Phaser", EFFECT_TAG));
 		p->addModel(createModel<ChorusFxWidget>("Autodafe",  "Chorus", "Chorus", EFFECT_TAG));
-=======
-		//printf("%p %p\n", plugin, &plugin);
->>>>>>> b21f5674d48ade4815d1098f8437472628d31254
-		
+		//p->addModel(createModel<FlangerFxWidget>("Autodafe", "Autodafe", "Flanger", "Flanger"));
+		//->addModel(createModel<EchoFxWidget>("Autodafe", "Autodafe", "Echo", "Echo"));
 		p->addModel(createModel<ReverbFxWidget>("Autodafe", "Reverb", "Reverb", EFFECT_TAG, REVERB_TAG));
-	
-	
+		//p->addModel(createModel<PitchShifterFxWidget>("Autodafe", "Autodafe", "Pitch Shifter", "Pitch Shifter"));
+		//p->addModel(createModel<CompressorWidget>("Autodafe",  "Compressor", "Compressor", EFFECT_TAG, DYNAMICS_TAG));
+
+		//p->addModel(createModel<KnobDemoWidget>("Autodafe", "Autodafe", "Demo Knobs", "Demo Knobs"));
+		
+		//p->addModel(createModel<WavesModelWidget>("Autodafe", "Autodafe", "W[A]VEFORMS", "W[A]VEFORMS"));
+		//p->addModel(createModel<SquareVCOModelWidget>("Autodafe", "S[Q]UARE", "S[Q]UARE", OSCILLATOR_TAG));
+		//p->addModel(createModel<CosineVCOModelWidget>("Autodafe",  "CO[S]INE", "CO[S]INE", OSCILLATOR_TAG));
+		//p->addModel(createModel<DWOVCOModelWidget>("Autodafe",  "D[W]O", "D[W]O", OSCILLATOR_TAG));
+		//p->addModel(createModel<OPERATORModelWidget>("Autodafe",  "O[P]ERATOR", "O[P]ERATOR", OSCILLATOR_TAG));
+		//p->addModel(createModel<AMVCOModelWidget>("Autodafe",  "TRES[AM]IGOS", "TRES[AM]IGOS", OSCILLATOR_TAG));
+		//p->addModel(createModel<FMVCOModelWidget>("Autodafe",  "[FM]ERIDES", "[FM]ERIDES", OSCILLATOR_TAG));
+		
+ 
+
+		//p->addModel(createModel<SamplerModelWidget>("Autodafe", "Sampler", "Sampler", SAMPLER_TAG));
+		//p->addModel(createModel<DrumSamplerWidget>("Autodafe",  "Drum Sampler", "Drum Sampler", SAMPLER_TAG, DRUM_TAG));
+		
 
 		
 	
