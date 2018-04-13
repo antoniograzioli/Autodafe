@@ -1,24 +1,3 @@
 # Autodafe Module Pack for VCV Rack
 
-Autodafe Module Pack for VCV rack contains 13 modules:
-
-LFO module with CV Input
-
-Simple but handy 1x8 and 2x8 Multiples
-
-Clock Divider
-
-8-Steps and 16-Steps Sequencers
-
-8x16 Trigger Sequencer
-
-Fixed Filter Bank
-
-Foldback distortion
-
-Bitcrusher
-
-Phaser
-
-
-There are releases for Rack 0.4.0 and 0.3.2 as well
+At the moment the sources here on github are broken. I plan to remove everything and upload them from scratch, in the meantime you can download all my compiled plugins from https://www.autodafe.net/virtual-instruments/vcv-rack-modules.html
